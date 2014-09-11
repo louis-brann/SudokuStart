@@ -21,6 +21,7 @@
 		DA07252319C247B6001F4BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250519C247B6001F4BC2 /* UIKit.framework */; };
 		DA07252B19C247B6001F4BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA07252919C247B6001F4BC2 /* InfoPlist.strings */; };
 		DA07252D19C247B6001F4BC2 /* SudokuStartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */; };
+		DA07253819C248D7001F4BC2 /* LBRMGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07253719C248D7001F4BC2 /* LBRMGrid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		DA07252819C247B6001F4BC2 /* SudokuStartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokuStartTests-Info.plist"; sourceTree = "<group>"; };
 		DA07252A19C247B6001F4BC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokuStartTests.m; sourceTree = "<group>"; };
+		DA07253619C248D7001F4BC2 /* LBRMGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGrid.h; sourceTree = "<group>"; };
+		DA07253719C248D7001F4BC2 /* LBRMGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGrid.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				DA07251319C247B6001F4BC2 /* Main.storyboard */,
 				DA07251619C247B6001F4BC2 /* LBRMViewController.h */,
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
+				DA07253619C248D7001F4BC2 /* LBRMGrid.h */,
+				DA07253719C248D7001F4BC2 /* LBRMGrid.m */,
 				DA07251919C247B6001F4BC2 /* Images.xcassets */,
 				DA07250819C247B6001F4BC2 /* Supporting Files */,
 			);
@@ -250,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA07253819C248D7001F4BC2 /* LBRMGrid.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
 				DA07251219C247B6001F4BC2 /* LBRMAppDelegate.m in Sources */,
