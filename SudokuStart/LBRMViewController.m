@@ -48,27 +48,55 @@ int initialGrid[9][9]={
     [self.view addSubview:_gridView];
     
     // create buttons
+    CGFloat buttonSize = size/10.0;
+    CGFloat baseOffset = buttonSize/14.0;
+    CGFloat xOffset = baseOffset;
+    
     for (int i = 0; i < 9; ++i){
+        
+        CGFloat yOffset = baseOffset;
+        
+        if (i % 3 == 0){
+            xOffset += baseOffset;
+        }
+        
         for (int j = 0; j < 9; ++j){
-            CGFloat buttonSize = size/20.0;
-            CGRect buttonFrame = CGRectMake(buttonSize*i, buttonSize*j, buttonSize, buttonSize);
+            
+            if (j % 3 == 0){
+                yOffset += baseOffset;
+            }
+            
+            CGRect buttonFrame =
+                 CGRectMake(xOffset,
+                            yOffset,
+                            buttonSize,
+                            buttonSize);
+            
+            yOffset += buttonSize+baseOffset;
+            
             _button = [[UIButton alloc] initWithFrame:buttonFrame];
             _button.backgroundColor = [UIColor whiteColor];
             [_gridView addSubview:_button];
+            
+            // create target for button
+            [_button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // Set up title and title color
+            NSString* number = [NSString stringWithFormat:@"%d",initialGrid[i][j]];
+            if (![number isEqualToString:@"0"]){
+                [_button setTitle:number forState:UIControlStateNormal];
+            }
+            [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
+            _button.titleLabel.adjustsFontSizeToFitWidth = YES;
+            
+            _button.tag = i*10+j;
         }
+        
+        xOffset += buttonSize + baseOffset;
     }
     
     
-    // create target for button
-    [_button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Set up title and title color
-    [_button setTitle:@"Hit me!" forState:UIControlStateNormal];
-    [_button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [_button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
-    _button.titleLabel.adjustsFontSizeToFitWidth = YES;
-    
-    _button.tag = 1;
     
     
 }
@@ -82,7 +110,7 @@ int initialGrid[9][9]={
 - (void)buttonPressed:(id)sender
 {
     UIButton* button = (UIButton*)sender;
-    NSLog(@"Button pressed: %d", button.tag);
+    NSLog(@"Row: %d, Column: %d", button.tag%10+1, button.tag/10+1);
     
 }
 
