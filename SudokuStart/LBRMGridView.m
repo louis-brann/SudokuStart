@@ -21,7 +21,8 @@ int initialGrid[9][9]={
 };
 
 @implementation LBRMGridView {
-        UIButton* _button;
+    UIButton* _button;
+    NSMutableArray* _buttons = [[NSMutableArray alloc] initWithCapacity:9];
 }
 
 - (id)initWithFrame:(CGRect)frame
