@@ -8,21 +8,9 @@
 
 #import "LBRMGridView.h"
 
-int initialGrid[9][9]={
-    {7,0,0,4,2,0,0,0,9},
-    {0,0,9,5,0,0,0,0,4},
-    {0,2,0,6,9,0,5,0,0},
-    {6,5,0,0,0,0,4,3,0},
-    {0,8,0,0,0,6,0,0,7},
-    {0,1,0,0,4,5,6,0,0},
-    {0,0,0,8,6,0,0,0,2},
-    {3,4,0,9,0,0,1,0,0},
-    {8,0,0,3,0,2,7,4,0}
-};
 
 @implementation LBRMGridView {
-    UIButton* _button;
-    NSMutableArray* _buttons = [[NSMutableArray alloc] initWithCapacity:9];
+    NSMutableArray* _buttons;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -30,6 +18,14 @@ int initialGrid[9][9]={
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        UIButton* button;
+        
+        // Initialize array of buttons
+        _buttons = [[NSMutableArray alloc] initWithCapacity:9];
+        for (int i = 0; i < 9; ++i) {
+            [_buttons addObject:[[NSMutableArray alloc] initWithCapacity:9]];
+        }
+
         CGFloat size = MIN(frame.size.height, frame.size.width);
         
         // create buttons
@@ -59,23 +55,20 @@ int initialGrid[9][9]={
                 
                 yOffset += buttonSize+baseOffset;
                 
-                _button = [[UIButton alloc] initWithFrame:buttonFrame];
-                _button.backgroundColor = [UIColor whiteColor];
-                [self addSubview:_button];
+                button = [[UIButton alloc] initWithFrame:buttonFrame];
+                button.backgroundColor = [UIColor whiteColor];
+                [self addSubview: button];
                 
                 // create target for button
-                [_button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
                 
                 // Set up title and title color
-                NSString* number = [NSString stringWithFormat:@"%d",initialGrid[i][j]];
-                if (![number isEqualToString:@"0"]){
-                    [_button setTitle:number forState:UIControlStateNormal];
-                }
-                [_button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [_button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
-                _button.titleLabel.adjustsFontSizeToFitWidth = YES;
+                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
+                button.titleLabel.adjustsFontSizeToFitWidth = YES;
                 
-                _button.tag = i*10+j;
+                button.tag = i*10+j;
+                [[_buttons objectAtIndex:j] insertObject:button atIndex:i];
             }
             
             xOffset += buttonSize + baseOffset;
@@ -90,6 +83,15 @@ int initialGrid[9][9]={
     UIButton* button = (UIButton*)sender;
     NSLog(@"Row: %d, Column: %d", button.tag%10+1, button.tag/10+1);
     
+}
+
+-(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value
+{
+    UIButton* button = [[_buttons objectAtIndex:col] objectAtIndex:row];
+    NSString* number = [NSString stringWithFormat:@"%d", value];
+    if (![number isEqualToString:@"0"]){
+        [button setTitle:number forState:UIControlStateNormal];
+    }
 }
 
 /*

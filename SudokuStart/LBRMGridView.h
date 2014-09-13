@@ -10,4 +10,7 @@
 
 @interface LBRMGridView : UIView
 
+
+-(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value;
+
 @end
