@@ -8,6 +8,8 @@
 
 #import "LBRMGridView.h"
 
+static double const gridSizeRelativeToButtonSize = 10.0;
+static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
 
 @implementation LBRMGridView {
     NSMutableArray* _buttons;
@@ -26,17 +28,20 @@
             [_buttons addObject:[[NSMutableArray alloc] initWithCapacity:9]];
         }
 
-        CGFloat size = MIN(frame.size.height, frame.size.width);
+        // The frame is a square so the width and height are interchangeable.
+        CGFloat size = CGRectGetHeight(frame);
         
         // create buttons
-        CGFloat buttonSize = size/10.0;
-        CGFloat baseOffset = buttonSize/14.0;
+        CGFloat buttonSize = size / gridSizeRelativeToButtonSize;
+        CGFloat baseOffset = buttonSize / gridSizeRelativeToWidthOfSpacingLine;
         CGFloat xOffset = baseOffset;
         
+        // Creates all 81 buttons in the grid.
         for (int i = 0; i < 9; ++i){
             
             CGFloat yOffset = baseOffset;
             
+            // Extra padding is added every three squares so it's clear where the subgrids are.
             if (i % 3 == 0){
                 xOffset += baseOffset;
             }
@@ -47,13 +52,9 @@
                     yOffset += baseOffset;
                 }
                 
-                CGRect buttonFrame =
-                CGRectMake(xOffset,
-                           yOffset,
-                           buttonSize,
-                           buttonSize);
+                CGRect buttonFrame = CGRectMake(xOffset, yOffset, buttonSize, buttonSize);
                 
-                yOffset += buttonSize+baseOffset;
+                yOffset += buttonSize + baseOffset;
                 
                 button = [[UIButton alloc] initWithFrame:buttonFrame];
                 button.backgroundColor = [UIColor whiteColor];
@@ -67,7 +68,9 @@
                 [button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
                 button.titleLabel.adjustsFontSizeToFitWidth = YES;
                 
-                button.tag = i*10+j;
+                // The tag encodes the row and column in one number by multiplying the
+                // column by ten and adding the row.
+                button.tag = i * 10 + j;
                 [[_buttons objectAtIndex:j] insertObject:button atIndex:i];
             }
             
@@ -94,13 +97,5 @@
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
