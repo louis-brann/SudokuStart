@@ -12,5 +12,6 @@
 
 
 -(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value;
+-(void)addTarget:(id)target action:(SEL) action;
 
 @end

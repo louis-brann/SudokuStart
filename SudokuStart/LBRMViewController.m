@@ -35,7 +35,7 @@ static int const sizeRelativeToPadding = 8;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
     
     // Create the frame, leaving 10% padding on each side, resulting in a centred
     // frame that takes up 80% of the screen.
@@ -48,6 +48,10 @@ static int const sizeRelativeToPadding = 8;
     
     // create grid view
     _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
+    
+    // Set target and action for button presses in grid view
+    [_gridView addTarget:self action:@selector(buttonPressed:)];
+    
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
     
@@ -57,8 +61,15 @@ static int const sizeRelativeToPadding = 8;
             [_gridView setValueAtRow:i andColumn:j to:initialGrid[i][j]];
         }
     }
+
     
-    
+}
+
+
+- (void)buttonPressed:(id) sender
+{
+    UIButton* button = (UIButton*)sender;
+    NSLog(@"Row: %d, Column: %d", button.tag % 10 + 1, button.tag / 10 + 1);
     
 }
 

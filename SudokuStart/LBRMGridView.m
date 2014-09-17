@@ -13,6 +13,8 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
 
 @implementation LBRMGridView {
     NSMutableArray* _buttons;
+    SEL _buttonPressedAction;
+    id _viewControllerId;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -61,7 +63,8 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
                 [self addSubview: button];
                 
                 // create target for button
-                [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                NSLog(@"%@", _viewControllerId);
+                [button addTarget:_viewControllerId action:_buttonPressedAction forControlEvents:UIControlEventTouchUpInside];
                 
                 // Set up title and title color
                 [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -81,13 +84,6 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
     return self;
 }
 
-- (void)buttonPressed:(id)sender
-{
-    UIButton* button = (UIButton*)sender;
-    NSLog(@"Row: %d, Column: %d", button.tag%10+1, button.tag/10+1);
-    
-}
-
 -(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value
 {
     UIButton* button = [[_buttons objectAtIndex:col] objectAtIndex:row];
@@ -97,5 +93,11 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
     }
 }
 
+-(void)addTarget:(id)target action:(SEL) action
+{
+    NSLog(@"???");
+    _viewControllerId = target;
+    _buttonPressedAction = action;
+}
 
 @end
