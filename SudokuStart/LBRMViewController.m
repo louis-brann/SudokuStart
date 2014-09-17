@@ -21,10 +21,11 @@ int initialGrid[9][9]={
     {8,0,0,3,0,2,7,4,0}
 };
 
+static double const padding = .1;
+static int const sizeRelativeToPadding = 8;
 
 @interface LBRMViewController (){
     LBRMGridView* _gridView;
-
 }
 
 @end
@@ -35,11 +36,13 @@ int initialGrid[9][9]={
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    // Create the frame, leaving 10% padding on each side, resulting in a centred
+    // frame that takes up 80% of the screen.
     CGRect frame = self.view.frame;
-    CGFloat x = CGRectGetWidth(frame) * 0.1;
-    CGFloat y = CGRectGetHeight(frame) * 0.1;
-    CGFloat size = MIN(8*x,8*y);
- 
+    CGFloat x = CGRectGetWidth(frame) * padding;
+    CGFloat y = CGRectGetHeight(frame) * padding;
+    CGFloat size = MIN(x, y) * sizeRelativeToPadding;
     
     CGRect gridFrame = CGRectMake(x, y, size, size);
     
@@ -48,6 +51,7 @@ int initialGrid[9][9]={
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
     
+    // Set the initial values of the squares in the sudoku grid.
     for (int i = 0; i < 9; ++i){
         for (int j = 0; j < 9; ++j){
             [_gridView setValueAtRow:i andColumn:j to:initialGrid[i][j]];
