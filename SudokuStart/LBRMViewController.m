@@ -46,11 +46,15 @@ static int const sizeRelativeToPadding = 8;
     
     CGRect gridFrame = CGRectMake(x, y, size, size);
     
-    // create grid view
-    _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
     
     // Set target and action for button presses in grid view
+    
+    
+    // create grid view
+    _gridView = [LBRMGridView alloc];
     [_gridView addTarget:self action:@selector(buttonPressed:)];
+    _gridView = [_gridView initWithFrame:gridFrame];
+    
     
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
