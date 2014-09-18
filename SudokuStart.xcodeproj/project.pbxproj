@@ -23,6 +23,7 @@
 		DA07252B19C247B6001F4BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA07252919C247B6001F4BC2 /* InfoPlist.strings */; };
 		DA07252D19C247B6001F4BC2 /* SudokuStartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */; };
 		DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */; };
+		DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokuStartTests.m; sourceTree = "<group>"; };
 		DABC6CC619C946230008ECFD /* UIImage+LBSTColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LBSTColorImage.h"; sourceTree = "<group>"; };
 		DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LBSTColorImage.m"; sourceTree = "<group>"; };
+		DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTNumPadView.h; sourceTree = "<group>"; };
+		DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTNumPadView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
 				D8AB4FA219C377550004EAD0 /* LBRMGridView.h */,
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
+				DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */,
+				DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */,
 				DA07251919C247B6001F4BC2 /* Images.xcassets */,
 				DA07250819C247B6001F4BC2 /* Supporting Files */,
 			);
@@ -268,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */,
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,

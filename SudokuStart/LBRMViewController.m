@@ -8,6 +8,7 @@
 
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
+#import "LBSTNumPadView.h"
 
 int initialGrid[9][9]={
     {7,0,0,4,2,0,0,0,9},
@@ -24,6 +25,7 @@ int initialGrid[9][9]={
 
 @interface LBRMViewController (){
     LBRMGridView* _gridView;
+    LBSTNumPadView* _numPadView;
 }
 
 @end
@@ -34,17 +36,18 @@ int initialGrid[9][9]={
 {
     [super viewDidLoad];
     
-	// Set up the grid frame, based on a specified percentage of the frame that
-    //   the grid is supposed to take up
+    // Get frame and frame dimensions
     CGRect frame = self.view.frame;
-    CGFloat pctOfFrame = 0.80;
-    CGFloat width = CGRectGetWidth(frame);
-    CGFloat height = CGRectGetHeight(frame);
-    CGFloat x = 0.1 * width;
-    CGFloat y = 0.1 * height;
-    CGFloat size = MIN(width,height)*pctOfFrame;
- 
-    CGRect gridFrame = CGRectMake(x, y, size, size);
+    CGFloat frameWidth = CGRectGetWidth(frame);
+    CGFloat frameHeight = CGRectGetHeight(frame);
+    
+    // Set up the grid frame, based on a specified percentage of the frame that
+    //   the grid is supposed to take up
+    CGFloat gridPctOfFrame = 0.80;
+    CGFloat gridXOffset = 0.1 * frameWidth;
+    CGFloat gridYOffset = 0.1 * frameHeight;
+    CGFloat gridSize = MIN(frameWidth,frameHeight)*gridPctOfFrame;
+    CGRect gridFrame = CGRectMake(gridXOffset, gridYOffset, gridSize, gridSize);
     
     // Create grid view
     _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
@@ -56,6 +59,17 @@ int initialGrid[9][9]={
             [_gridView setValueAtRow:i andColumn:j to:initialGrid[i][j]];
         }
     }
+    
+    // Create numPad frame
+    CGFloat numPadWidth = gridSize;
+    CGFloat numPadHeight = gridSize/10.0;
+    CGFloat numPadYOffset = 2.0*gridYOffset + gridFrame.size.height;
+    CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
+    
+    // Create numPad view
+    _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
+    _numPadView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_numPadView];
     
     
     
