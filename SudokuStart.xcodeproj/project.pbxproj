@@ -22,6 +22,7 @@
 		DA07252319C247B6001F4BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250519C247B6001F4BC2 /* UIKit.framework */; };
 		DA07252B19C247B6001F4BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA07252919C247B6001F4BC2 /* InfoPlist.strings */; };
 		DA07252D19C247B6001F4BC2 /* SudokuStartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */; };
+		DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		DA07252819C247B6001F4BC2 /* SudokuStartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokuStartTests-Info.plist"; sourceTree = "<group>"; };
 		DA07252A19C247B6001F4BC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokuStartTests.m; sourceTree = "<group>"; };
+		DABC6CC619C946230008ECFD /* UIImage+LBSTColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LBSTColorImage.h"; sourceTree = "<group>"; };
+		DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LBSTColorImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +118,10 @@
 		DA07250719C247B6001F4BC2 /* SudokuStart */ = {
 			isa = PBXGroup;
 			children = (
+				DABC6CC919C949EB0008ECFD /* iPad */,
 				DA07251019C247B6001F4BC2 /* LBRMAppDelegate.h */,
+				DABC6CC619C946230008ECFD /* UIImage+LBSTColorImage.h */,
+				DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */,
 				DA07251119C247B6001F4BC2 /* LBRMAppDelegate.m */,
 				DA07251319C247B6001F4BC2 /* Main.storyboard */,
 				DA07251619C247B6001F4BC2 /* LBRMViewController.h */,
@@ -155,6 +161,13 @@
 				DA07252919C247B6001F4BC2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DABC6CC919C949EB0008ECFD /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +271,7 @@
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
+				DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */,
 				DA07251219C247B6001F4BC2 /* LBRMAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,7 +400,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -399,7 +415,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

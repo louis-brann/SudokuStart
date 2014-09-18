@@ -24,7 +24,6 @@ int initialGrid[9][9]={
 
 @interface LBRMViewController (){
     LBRMGridView* _gridView;
-
 }
 
 @end
@@ -34,16 +33,20 @@ int initialGrid[9][9]={
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    CGRect frame = self.view.frame;
-    CGFloat x = CGRectGetWidth(frame) * 0.1;
-    CGFloat y = CGRectGetHeight(frame) * 0.1;
-    CGFloat size = MIN(8*x,8*y);
- 
     
+	// Set up the grid frame, based on a specified percentage of the frame that
+    //   the grid is supposed to take up
+    CGRect frame = self.view.frame;
+    CGFloat pctOfFrame = 0.80;
+    CGFloat width = CGRectGetWidth(frame);
+    CGFloat height = CGRectGetHeight(frame);
+    CGFloat x = 0.1 * width;
+    CGFloat y = 0.1 * height;
+    CGFloat size = MIN(width,height)*pctOfFrame;
+ 
     CGRect gridFrame = CGRectMake(x, y, size, size);
     
-    // create grid view
+    // Create grid view
     _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
