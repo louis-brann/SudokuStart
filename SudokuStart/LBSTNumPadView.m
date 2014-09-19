@@ -60,7 +60,7 @@
         // Set up title
         [button setTitle:[NSString stringWithFormat:@"%d", buttonNum] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:IPAD_FONT_SIZE];
+        button.titleLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:IPAD_FONT_SIZE];
         button.titleLabel.adjustsFontSizeToFitWidth = YES;
         
         [self addSubview:button];

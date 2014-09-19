@@ -67,11 +67,11 @@
                 [self addSubview: button];
                 
                 // Create target for button
-                [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [button addTarget:self action:@selector(cellSelected:) forControlEvents:UIControlEventTouchUpInside];
                 
                 // Set up title
                 [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                button.titleLabel.font = [UIFont systemFontOfSize:IPAD_FONT_SIZE];
+                button.titleLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:IPAD_FONT_SIZE];
                 button.titleLabel.adjustsFontSizeToFitWidth = YES;
                 
                 // Set up highlighted background
@@ -98,10 +98,10 @@
     return self;
 }
 
-- (void)buttonPressed:(id)sender
+- (void)cellSelected:(id)sender
 {
-    UIButton *button = (UIButton*)sender;
-    NSLog(@"Row: %ld, Column: %ld", button.tag%10+1, button.tag/10+1);
+    // Send info to ViewController
+    [self.delegate cellWasTapped:sender];
 }
 
 -(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value

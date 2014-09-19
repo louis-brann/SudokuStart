@@ -8,24 +8,14 @@
 
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
+#import "LBSTGridModel.h"
 #import "LBSTNumPadView.h"
-
-int initialGrid[9][9]={
-    {7,0,0,4,2,0,0,0,9},
-    {0,0,9,5,0,0,0,0,4},
-    {0,2,0,6,9,0,5,0,0},
-    {6,5,0,0,0,0,4,3,0},
-    {0,8,0,0,0,6,0,0,7},
-    {0,1,0,0,4,5,6,0,0},
-    {0,0,0,8,6,0,0,0,2},
-    {3,4,0,9,0,0,1,0,0},
-    {8,0,0,3,0,2,7,4,0}
-};
 
 
 @interface LBRMViewController (){
     LBRMGridView *_gridView;
     LBSTNumPadView *_numPadView;
+    LBSTGridModel *_gridModel;
 }
 
 @end
@@ -51,12 +41,17 @@ int initialGrid[9][9]={
     
     // Create grid view
     _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
+    _gridView.delegate = self;
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
     
+    // Initialize GridModel and initialize grid
+    _gridModel = [[LBSTGridModel alloc] init];
+    
     for (int i = 0; i < 9; ++i){
         for (int j = 0; j < 9; ++j){
-            [_gridView setValueAtRow:i andColumn:j to:initialGrid[i][j]];
+            int numberToSet = [_gridModel getValueAtRow:i andColumn:j];
+            [_gridView setValueAtRow:i andColumn:j to:numberToSet];
         }
     }
     
@@ -70,15 +65,20 @@ int initialGrid[9][9]={
     _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
     _numPadView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_numPadView];
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cellWasTapped:(id)sender
+{
+    UIButton *button = (UIButton*)sender;
+    int row = button.tag%10+1;
+    int col = button.tag/10+1;
+    NSLog(@"Button row: %d column: %d", row, col);
 }
 
 

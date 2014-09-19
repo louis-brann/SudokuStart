@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LBRMGridView.h"
 
-@interface LBRMViewController : UIViewController
+@interface LBRMViewController : UIViewController <CellWasTapped>
 
 @end
