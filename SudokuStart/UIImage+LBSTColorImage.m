@@ -10,7 +10,7 @@
 
 @implementation UIImage (LBSTColorImage)
 
-+ (UIImage *)imageWithColor: (UIColor*) color
++ (UIImage*)imageWithColor: (UIColor*)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -19,7 +19,7 @@
     CGContextSetFillColorWithColor(context, [color CGColor]);
     CGContextFillRect(context, rect);
     
-    UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;
 }

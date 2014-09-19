@@ -12,7 +12,7 @@
 
 
 @implementation LBRMGridView {
-    NSMutableArray* _buttons;
+    NSMutableArray *_buttons;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -37,7 +37,7 @@
         CGFloat baseOffset = buttonSize/(10.0 + 4.0);
         
         CGFloat xOffset = baseOffset;
-        UIButton* button;
+        UIButton *button;
         CGFloat IPAD_FONT_SIZE = 40;
         
         for (int i = 0; i < 9; ++i){
@@ -100,15 +100,14 @@
 
 - (void)buttonPressed:(id)sender
 {
-    UIButton* button = (UIButton*)sender;
-    NSLog(@"Row: %d, Column: %d", button.tag%10+1, button.tag/10+1);
-    
+    UIButton *button = (UIButton*)sender;
+    NSLog(@"Row: %ld, Column: %ld", button.tag%10+1, button.tag/10+1);
 }
 
 -(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value
 {
-    UIButton* button = [[_buttons objectAtIndex:col] objectAtIndex:row];
-    NSString* number = [NSString stringWithFormat:@"%d", value];
+    UIButton *button = [[_buttons objectAtIndex:col] objectAtIndex:row];
+    NSString *number = [NSString stringWithFormat:@"%d", value];
     if (![number isEqualToString:@"0"]){
         [button setTitle:number forState:UIControlStateNormal];
     }

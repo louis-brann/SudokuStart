@@ -24,8 +24,8 @@ int initialGrid[9][9]={
 
 
 @interface LBRMViewController (){
-    LBRMGridView* _gridView;
-    LBSTNumPadView* _numPadView;
+    LBRMGridView *_gridView;
+    LBSTNumPadView *_numPadView;
 }
 
 @end
@@ -62,8 +62,8 @@ int initialGrid[9][9]={
     
     // Create numPad frame
     CGFloat numPadWidth = gridSize;
-    CGFloat numPadHeight = gridSize/10.0;
-    CGFloat numPadYOffset = 2.0*gridYOffset + gridFrame.size.height;
+    CGFloat numPadHeight = (gridSize/10.0) * 1.2;
+    CGFloat numPadYOffset = (1.25 * gridYOffset) + gridFrame.size.height;
     CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
     
     // Create numPad view
