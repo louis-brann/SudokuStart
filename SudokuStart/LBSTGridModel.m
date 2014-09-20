@@ -110,12 +110,12 @@ int _currentGrid[9][9]={
     }
     
     // Check the subgrid of the value
-    int subgridRowOffset = row % 3;
-    int subgridColOffset = col % 3;
+    int subgridRowStart = row - (row % 3);
+    int subgridColStart = col - (col % 3);
     
-    for (int subgridRow = row - subgridRowOffset; subgridRow < 3; ++subgridRow) {
-        for (int subgridCol = col - subgridColOffset; subgridCol < 3; ++subgridCol) {
-            if (_initialGrid[subgridRow][subgridCol] == value) {
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+            if (_initialGrid[subgridRowStart+i][subgridColStart+j] == value) {
                 return NO;
             }
         }
