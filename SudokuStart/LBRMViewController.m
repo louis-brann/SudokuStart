@@ -9,6 +9,7 @@
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
 #import "LBRMGridModel.h"
+#import "LBRMNumPadView.h"
 
 
 
@@ -17,6 +18,7 @@ static int const sizeRelativeToPadding = 8;
 
 @interface LBRMViewController (){
     LBRMGridView* _gridView;
+    LBRMNumPadView* _numPadView;
     LBRMGridModel* _gridModel;
 }
 
@@ -46,6 +48,17 @@ static int const sizeRelativeToPadding = 8;
     _gridView = [LBRMGridView alloc];
     [_gridView addTarget:self action:@selector(buttonPressed:)];
     _gridView = [_gridView initWithFrame:gridFrame];
+    
+    // create the num pad view.  x will be the same, y will be below the bottom
+    // of grid frame, the width will be the same and the height be will be  TODO
+    CGFloat numPadY = y + size + size * padding;
+    CGFloat numPadHeight = size * padding;
+    
+    CGRect numPadFrame = CGRectMake(x, numPadY, size, numPadHeight);
+    
+    _numPadView = [[LBRMNumPadView alloc] initWithFrame:numPadFrame];
+    [self.view addSubview:_numPadView];
+    
     
     
     _gridView.backgroundColor = [UIColor blackColor];
