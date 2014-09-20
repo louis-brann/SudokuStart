@@ -76,8 +76,8 @@
 - (void)cellWasTapped:(id)sender
 {
     UIButton *button = (UIButton*)sender;
-    int row = button.tag%10;
-    int col = button.tag/10;
+    int row = button.tag/10;
+    int col = button.tag%10;
     
     if ([_gridModel isCellMutable:row andColumn:col]){
         // Check the current input for consistency
