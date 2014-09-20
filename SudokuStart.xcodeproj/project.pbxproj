@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
+		D8AB4FAC19CE31C30004EAD0 /* LBRMGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FAB19CE31C30004EAD0 /* LBRMGridModel.m */; };
 		DA07250219C247B6001F4BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250119C247B6001F4BC2 /* Foundation.framework */; };
 		DA07250419C247B6001F4BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250319C247B6001F4BC2 /* CoreGraphics.framework */; };
 		DA07250619C247B6001F4BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250519C247B6001F4BC2 /* UIKit.framework */; };
@@ -37,6 +38,8 @@
 /* Begin PBXFileReference section */
 		D8AB4FA219C377550004EAD0 /* LBRMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGridView.h; sourceTree = "<group>"; };
 		D8AB4FA319C377550004EAD0 /* LBRMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGridView.m; sourceTree = "<group>"; };
+		D8AB4FAA19CE31C30004EAD0 /* LBRMGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGridModel.h; sourceTree = "<group>"; };
+		D8AB4FAB19CE31C30004EAD0 /* LBRMGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGridModel.m; sourceTree = "<group>"; };
 		DA0724FE19C247B6001F4BC2 /* SudokuStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA07250119C247B6001F4BC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA07250319C247B6001F4BC2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +123,8 @@
 				DA07251319C247B6001F4BC2 /* Main.storyboard */,
 				DA07251619C247B6001F4BC2 /* LBRMViewController.h */,
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
+				D8AB4FAA19CE31C30004EAD0 /* LBRMGridModel.h */,
+				D8AB4FAB19CE31C30004EAD0 /* LBRMGridModel.m */,
 				D8AB4FA219C377550004EAD0 /* LBRMGridView.h */,
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
 				DA07251919C247B6001F4BC2 /* Images.xcassets */,
@@ -259,6 +264,7 @@
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
 				DA07251219C247B6001F4BC2 /* LBRMAppDelegate.m in Sources */,
+				D8AB4FAC19CE31C30004EAD0 /* LBRMGridModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +392,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -399,7 +407,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
