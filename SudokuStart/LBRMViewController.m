@@ -48,17 +48,17 @@
     // Initialize GridModel and initialize grid
     _gridModel = [[LBSTGridModel alloc] init];
     
-    for (int i = 0; i < 9; ++i){
-        for (int j = 0; j < 9; ++j){
-            int numberToSet = [_gridModel getValueAtRow:i andColumn:j];
-            [_gridView setValueAtRow:i andColumn:j to:numberToSet];
+    for (int row = 0; row < 9; ++row){
+        for (int col = 0; col < 9; ++col){
+            int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
+            [_gridView setValue:numberToSet atRow:row andColumn:col];
         }
     }
     
     // Create numPad frame
     CGFloat numPadWidth = gridSize;
     CGFloat numPadHeight = (gridSize/10.0) * 1.2;
-    CGFloat numPadYOffset = (1.25 * gridYOffset) + gridFrame.size.height;
+    CGFloat numPadYOffset = (1.25 * gridYOffset) + CGRectGetHeight(gridFrame);
     CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
     
     // Create numPad view
@@ -76,10 +76,20 @@
 - (void)cellWasTapped:(id)sender
 {
     UIButton *button = (UIButton*)sender;
-    int row = button.tag%10+1;
-    int col = button.tag/10+1;
-    NSLog(@"Button row: %d column: %d", row, col);
+    int row = button.tag%10;
+    int col = button.tag/10;
+    
+    if ([_gridModel isCellMutable:row andColumn:col]){
+        // Check the current input for consistency
+        int currentInput = [_numPadView currentNum];
+        BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];
+        
+        // If it's consistent, set the value
+        if (consistentInput){
+            [_gridModel setValue:currentInput atRow:row andColumn:col];
+            [_gridView setValue:currentInput atRow:row andColumn:col];
+        }
+    }
 }
-
 
 @end

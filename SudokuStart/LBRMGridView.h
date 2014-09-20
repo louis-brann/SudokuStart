@@ -16,6 +16,6 @@
 
 @property (nonatomic, assign) id <CellWasTapped> delegate;
 
--(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value;
+-(void)setValue:(int)value atRow:(int)row andColumn:(int)col;
 
 @end

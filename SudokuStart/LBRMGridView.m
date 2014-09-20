@@ -40,20 +40,20 @@
         UIButton *button;
         CGFloat IPAD_FONT_SIZE = 40;
         
-        for (int i = 0; i < 9; ++i){
+        for (int row = 0; row < 9; ++row){
             
             // Set/reset yOffset for new column
             CGFloat yOffset = baseOffset;
             
             // Extra horizontal offset to separate 3x3 subgrids
-            if (i % 3 == 0){
+            if (row % 3 == 0){
                 xOffset += baseOffset;
             }
             
-            for (int j = 0; j < 9; ++j){
+            for (int col = 0; col < 9; ++col){
                 
                 // Extra vertical offset to separate 3x3 subgrids
-                if (j % 3 == 0){
+                if (col % 3 == 0){
                     yOffset += baseOffset;
                 }
                 
@@ -71,7 +71,7 @@
                 
                 // Set up title
                 [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                button.titleLabel.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:IPAD_FONT_SIZE];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:IPAD_FONT_SIZE];
                 button.titleLabel.adjustsFontSizeToFitWidth = YES;
                 
                 // Set up highlighted background
@@ -81,10 +81,10 @@
                 
                 // Make the tag such that the first digit represents the
                 // row, and the second represents the column
-                button.tag = i*10+j;
+                button.tag = row*10+col;
                 
                 
-                [[_buttons objectAtIndex:j] insertObject:button atIndex:i];
+                [[_buttons objectAtIndex:row] insertObject:button atIndex:col];
                 
                 // Update column offset
                 yOffset += buttonSize+baseOffset;
@@ -104,14 +104,19 @@
     [self.delegate cellWasTapped:sender];
 }
 
--(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value
+-(void)setValue:(int)value atRow:(int)row andColumn:(int)col
 {
-    UIButton *button = [[_buttons objectAtIndex:col] objectAtIndex:row];
+    CGFloat IPAD_FONT_SIZE = 40;
+    
+    UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
     NSString *number = [NSString stringWithFormat:@"%d", value];
     if (![number isEqualToString:@"0"]){
         [button setTitle:number forState:UIControlStateNormal];
+        
+    } else {
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:IPAD_FONT_SIZE];
     }
+    
 }
-
 
 @end

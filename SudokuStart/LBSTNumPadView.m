@@ -12,7 +12,6 @@
 @implementation LBSTNumPadView
 {
     NSMutableArray *_numbers;
-    int _buttonSelected;
 }
 
 
@@ -50,7 +49,7 @@
         
         // Make button 1 the default selected button
         if (buttonNum == 1) {
-            _buttonSelected = buttonNum;
+            [self setCurrentNum:buttonNum];
             button.backgroundColor = NUMPAD_SELECT_COLOR;
         }
         else {
@@ -60,7 +59,7 @@
         // Set up title
         [button setTitle:[NSString stringWithFormat:@"%d", buttonNum] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont fontWithName:@"TrebuchetMS" size:IPAD_FONT_SIZE];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
         button.titleLabel.adjustsFontSizeToFitWidth = YES;
         
         [self addSubview:button];
@@ -84,16 +83,16 @@
     UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
     
     UIButton *newButton = (UIButton*)sender;
-    UIButton *oldButton = [_numbers objectAtIndex:(_buttonSelected - 1)];
+    UIButton *oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
     
     // Change the background colors appropriately
     oldButton.backgroundColor = NUMPAD_NORMAL_COLOR;
     newButton.backgroundColor = NUMPAD_SELECT_COLOR;
     
     // Update which button is currently selected
-    _buttonSelected = (int)newButton.tag;
+    [self setCurrentNum:(int)newButton.tag];
     
-    NSLog(@"Button %d currently selected", _buttonSelected);
+    NSLog(@"Button %d currently selected", [self currentNum]);
 }
 
 @end
