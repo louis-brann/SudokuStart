@@ -50,8 +50,14 @@ int initialGrid[9][9]={
 
 -(BOOL)updateValueAtRow:(int)row Column:(int)column withNewValue:(int)newValue
 {
-    // check for consistency
+    // check for consistency.  if the cell has a non-zero value in the initial
+    // array, it can't be changed, otherwise it can.
+    if (initialGrid[row][column] != 0) {
+        return NO;
+    }
+    
+    // IF the change is valid, tell the view controller
     _currentGrid[row][column] = newValue;
-    return true;
+    return YES;
 }
 @end

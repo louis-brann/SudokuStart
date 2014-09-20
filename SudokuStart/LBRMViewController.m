@@ -81,9 +81,20 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     
 }
 
+
+// Tells the model the cell that the user wants to change and what they want to
+// change the value to.  If the model says yes, it tells the grid view to change
+// the cell to the specified number.
 - (void)numPadButtonPressed:(id) sender
 {
-    
+    NSLog(@"I'm being called");
+    int row = _selectedCell.tag % 10;
+    int column = _selectedCell.tag / 10;
+    UIButton* numPadButton = (UIButton*)sender;
+    int value = [numPadButton.titleLabel.text integerValue];
+    if ([_gridModel updateValueAtRow:row Column:column withNewValue:value]) {
+        [_gridView setValueAtRow:row andColumn:column to:value];
+    }
 }
 
 - (void)buttonPressed:(id) sender
