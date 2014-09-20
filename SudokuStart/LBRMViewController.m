@@ -15,11 +15,13 @@
 
 static double const padding = .1;
 static int const sizeRelativeToPadding = 8;
+static double const heightOfNumPadRelativeToGridSize = 0.12;
 
 @interface LBRMViewController (){
     LBRMGridView* _gridView;
     LBRMNumPadView* _numPadView;
     LBRMGridModel* _gridModel;
+    UIButton* _selectedCell;
 }
 
 @end
@@ -52,11 +54,12 @@ static int const sizeRelativeToPadding = 8;
     // create the num pad view.  x will be the same, y will be below the bottom
     // of grid frame, the width will be the same and the height be will be  TODO
     CGFloat numPadY = y + size + size * padding;
-    CGFloat numPadHeight = size * padding;
+    CGFloat numPadHeight = size * heightOfNumPadRelativeToGridSize;
     
     CGRect numPadFrame = CGRectMake(x, numPadY, size, numPadHeight);
     
     _numPadView = [[LBRMNumPadView alloc] initWithFrame:numPadFrame];
+    [_numPadView addTarget:self Action:@selector(numPadButtonPressed:)];
     [self.view addSubview:_numPadView];
     
     
@@ -78,10 +81,17 @@ static int const sizeRelativeToPadding = 8;
     
 }
 
+- (void)numPadButtonPressed:(id) sender
+{
+    
+}
 
 - (void)buttonPressed:(id) sender
 {
+    _selectedCell.backgroundColor = [UIColor whiteColor];
     UIButton* button = (UIButton*)sender;
+    _selectedCell = button;
+    _selectedCell.backgroundColor = [UIColor yellowColor];
     NSLog(@"Row: %d, Column: %d", button.tag % 10 + 1, button.tag / 10 + 1);
     
 }

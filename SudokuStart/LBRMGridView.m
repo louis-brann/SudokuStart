@@ -68,7 +68,6 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
                 
                 // Set up title and title color
                 [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
                 button.titleLabel.adjustsFontSizeToFitWidth = YES;
                 
                 // The tag encodes the row and column in one number by multiplying the

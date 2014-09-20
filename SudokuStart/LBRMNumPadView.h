@@ -10,4 +10,6 @@
 
 @interface LBRMNumPadView : UIView
 
+-(void)addTarget:(id)target Action:(SEL)action;
+
 @end
