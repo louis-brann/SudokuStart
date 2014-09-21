@@ -10,7 +10,6 @@
 
 @interface LBSTNumPadView : UIView
 
-// TODO: Ask Grutor about property types and attributes
 @property (nonatomic) int currentNum;
 
 @end

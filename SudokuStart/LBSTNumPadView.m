@@ -11,72 +11,69 @@
 
 @implementation LBSTNumPadView
 {
-    NSMutableArray *_numbers;
+  NSMutableArray *_numbers;
 }
 
+static CGFloat const IPAD_FONT_SIZE = 30;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialize the array
-        _numbers = [[NSMutableArray alloc] initWithCapacity:9];
+  self = [super initWithFrame:frame];
+  if (self) {
+    // Initialize the array
+    _numbers = [[NSMutableArray alloc] initWithCapacity:9];
     
-        // TODO: ASK GRUTOR
-        UIColor *NUMPAD_NORMAL_COLOR = [UIColor greenColor];
-        UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
-        CGFloat IPAD_FONT_SIZE = 30;
-        
-        // Set up button size and offset
-        CGFloat buttonSize = frame.size.width / 10.0;
-        CGFloat baseOffset = buttonSize / 10.0;
-        CGFloat xOffset = baseOffset;
-        
-        UIButton *button;
-        
-        // Initialize number buttons
-        for (int i = 0; i < 9; ++i) {
-            CGRect buttonFrame = CGRectMake(xOffset, baseOffset, buttonSize, buttonSize);
-            
-            button = [[UIButton alloc] initWithFrame:buttonFrame];
-            
-            // Set button properties
-            int buttonNum = i + 1;
-            button.tag = buttonNum;
-            
-            // Make button 1 the default selected button
-            if (buttonNum == 1) {
-                [self setCurrentNum:buttonNum];
-                button.backgroundColor = NUMPAD_SELECT_COLOR;
-            }
-            else {
-                button.backgroundColor = NUMPAD_NORMAL_COLOR;
-            }
-            
-            // Set up title
-            [button setTitle:[NSString stringWithFormat:@"%d", buttonNum] forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
-            button.titleLabel.adjustsFontSizeToFitWidth = YES;
-            
-            [self addSubview:button];
-            
-            // Create target for button
-            [button addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
-            
-            // Add the button to the array
-            [_numbers insertObject:button atIndex:i];
-            
-            xOffset += buttonSize + baseOffset;
-        }
+    // Set up button size and offset
+    CGFloat buttonSize = frame.size.width / 10.0;
+    CGFloat baseOffset = buttonSize / 10.0;
+    CGFloat xOffset = baseOffset;
+    
+    UIButton *button;
+    
+    // Initialize number buttons
+    for (int i = 0; i < 9; ++i) {
+      CGRect buttonFrame = CGRectMake(xOffset, baseOffset, buttonSize, buttonSize);
+      
+      button = [[UIButton alloc] initWithFrame:buttonFrame];
+      
+      // Set button properties
+      int buttonNum = i + 1;
+      button.tag = buttonNum;
+      
+      // Make button 1 the default selected button
+      UIColor *NUMPAD_NORMAL_COLOR = [UIColor greenColor];
+      UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
+      if (buttonNum == 1) {
+        [self setCurrentNum:buttonNum];
+        button.backgroundColor = NUMPAD_SELECT_COLOR;
+      }
+      else {
+        button.backgroundColor = NUMPAD_NORMAL_COLOR;
+      }
+      
+      // Set up title
+      [button setTitle:[NSString stringWithFormat:@"%d", buttonNum] forState:UIControlStateNormal];
+      [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+      button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+      button.titleLabel.adjustsFontSizeToFitWidth = YES;
+      
+      [self addSubview:button];
+      
+      // Create target for button
+      [button addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+      
+      // Add the button to the array
+      [_numbers insertObject:button atIndex:i];
+      
+      xOffset += buttonSize + baseOffset;
     }
-    
-    return self;
+  }
+  
+  return self;
 }
 
 - (void)numSelected:(id)sender
 {
-    // TODO: ASK GRUTOR
     UIColor *NUMPAD_NORMAL_COLOR = [UIColor greenColor];
     UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
     

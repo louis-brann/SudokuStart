@@ -8,12 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AlertWin
+-(void)alertWin;
+@end
+
 @interface LBSTGridModel : NSObject
+
+@property (assign, nonatomic) id <AlertWin> delegate;
 
 -(void) initializeGrid;
 -(int) getValueAtRow:(int)row andColumn:(int)col;
 -(void) setValue:(int)value atRow:(int)row andColumn:(int)col;
 -(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col;
 -(BOOL) isValueConsistent:(int)input atRow:(int)row andColumn:(int)col;
+-(BOOL) isCurrentGridConsistentWithValue:(int)value atRow:(int)row andColumn:(int)col;
+-(BOOL) isWinning;
 
 @end

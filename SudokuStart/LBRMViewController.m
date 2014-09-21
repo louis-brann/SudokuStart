@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Louis Brann, Rachel Macfarlane. All rights reserved.
 //
 
-// TODO: Ask grutors about constants, arrays, test setup
-
 
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
@@ -39,7 +37,7 @@
     CGFloat gridPctOfFrame = 0.80;
     CGFloat gridXOffset = 0.1 * frameWidth;
     CGFloat gridYOffset = 0.1 * frameHeight;
-    CGFloat gridSize = MIN(frameWidth,frameHeight)*gridPctOfFrame;
+    CGFloat gridSize = MIN(frameWidth, frameHeight) * gridPctOfFrame;
     CGRect gridFrame = CGRectMake(gridXOffset, gridYOffset, gridSize, gridSize);
     
     // Create grid view
@@ -50,7 +48,12 @@
     
     // Initialize GridModel and initialize grid
     _gridModel = [[LBSTGridModel alloc] init];
+    _gridModel.delegate = self;
+    [_gridModel initializeGrid];
+  
     
+    // For every button, find the initial value from gridModel and set it in the
+    // gridView
     for (int row = 0; row < 9; ++row){
         for (int col = 0; col < 9; ++col){
             int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
@@ -93,6 +96,16 @@
             [_gridView setValue:currentInput atRow:row andColumn:col];
         }
     }
+}
+
+- (void)alertWin
+{
+  UIAlertView *winAlert = [[UIAlertView alloc] initWithTitle:@"Congratulations!"
+                                                     message:@"You've won!"
+                                                    delegate:self
+                                           cancelButtonTitle:@"Yeah!"
+                                           otherButtonTitles: nil];
+  [winAlert show];
 }
 
 @end
