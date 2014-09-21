@@ -10,8 +10,7 @@
 
 @interface LBRMGridView : UIView
 
-
--(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value;
+-(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value isInitial:(BOOL)isInitial;
 -(void)addTarget:(id)target action:(SEL) action;
 
 @end

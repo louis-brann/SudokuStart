@@ -60,4 +60,67 @@ int initialGrid[9][9]={
     _currentGrid[row][column] = newValue;
     return YES;
 }
+
+-(BOOL)checkSubsquareIsSolvedWithStartRow:(int)startRow startColumn:(int)startColumn
+{
+    for (int i = startRow; i < (startRow + 3); ++i) {
+        NSMutableSet* alreadySeenValues = [[NSMutableSet alloc] init];
+        for (int j = startColumn; j < (startColumn + 3); ++j) {
+            // there is a blank box, grid not filled out
+            if (_currentGrid[i][j] == 0) {
+                return NO;
+            }
+            if ([alreadySeenValues containsObject:@(_currentGrid[i][j])]) {
+                return NO;
+            } else {
+                [alreadySeenValues addObject:@(_currentGrid[i][j])];
+            }
+        }
+    }
+    return YES;
+}
+
+-(BOOL)checkGridIsSolved
+{
+    // check that there are no repeated values in any rows
+    for (int i = 0; i < 9; ++i) {
+        NSMutableSet* alreadySeenValues = [[NSMutableSet alloc] init];
+        for (int j = 0; j < 9; ++j) {
+            // there is a blank box, grid not filled out
+            if (_currentGrid[i][j] == 0) {
+                return NO;
+            }
+            if ([alreadySeenValues containsObject:@(_currentGrid[i][j])]) {
+                return NO;
+            } else {
+                [alreadySeenValues addObject:@(_currentGrid[i][j])];
+            }
+        }
+    }
+    
+    for (int i = 0; i < 9; ++i) {
+        NSMutableSet* alreadySeenValues = [[NSMutableSet alloc] init];
+        for (int j = 0; j < 9; ++j) {
+            // there is a blank box, grid not filled out
+            if (_currentGrid[j][i] == 0) {
+                return NO;
+            }
+            if ([alreadySeenValues containsObject:@(_currentGrid[j][i])]) {
+                return NO;
+            } else {
+                [alreadySeenValues addObject:@(_currentGrid[j][i])];
+            }
+        }
+    }
+    
+    for (int i = 0; i < 9; i += 3) {
+        for (int j = 0; j < 9; j += 3) {
+            if (![self checkSubsquareIsSolvedWithStartRow:i startColumn:j]) {
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
 @end

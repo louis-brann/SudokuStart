@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LBRMViewController : UIViewController
+    @property (weak, nonatomic) UIButton* _checkSolutionButton;
 
 @end

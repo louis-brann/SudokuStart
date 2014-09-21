@@ -73,7 +73,7 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
                 // The tag encodes the row and column in one number by multiplying the
                 // column by ten and adding the row.
                 button.tag = i * 10 + j;
-                [[_buttons objectAtIndex:j] insertObject:button atIndex:i];
+                [[_buttons objectAtIndex:i] insertObject:button atIndex:j];
             }
             
             xOffset += buttonSize + baseOffset;
@@ -83,18 +83,21 @@ static double const gridSizeRelativeToWidthOfSpacingLine = 14.0;
     return self;
 }
 
--(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value
+-(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value isInitial:(BOOL)isInitial
 {
     UIButton* button = [[_buttons objectAtIndex:col] objectAtIndex:row];
     NSString* number = [NSString stringWithFormat:@"%d", value];
     if (![number isEqualToString:@"0"]){
         [button setTitle:number forState:UIControlStateNormal];
     }
+    
+    if (!isInitial) {
+        [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    }
 }
 
 -(void)addTarget:(id)target action:(SEL) action
 {
-    NSLog(@"???");
     _viewControllerId = target;
     _buttonPressedAction = action;
 }

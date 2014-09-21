@@ -13,5 +13,6 @@
 -(void)initializeGrid;
 -(int)getValueAtRow:(int)row Column:(int)column;
 -(BOOL)updateValueAtRow:(int)row Column:(int)column withNewValue:(int)newValue;
+-(BOOL)checkGridIsSolved;
 
 @end

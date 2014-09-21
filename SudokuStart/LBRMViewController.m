@@ -22,6 +22,7 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     LBRMNumPadView* _numPadView;
     LBRMGridModel* _gridModel;
     UIButton* _selectedCell;
+  //  UIButton* _checkSolutionButton;
 }
 
 @end
@@ -53,6 +54,7 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     
     // create the num pad view.  x will be the same, y will be below the bottom
     // of grid frame, the width will be the same and the height be will be  TODO
+    //CGFloat buttonSize = size * padding;
     CGFloat numPadY = y + size + size * padding;
     CGFloat numPadHeight = size * heightOfNumPadRelativeToGridSize;
     
@@ -61,7 +63,6 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     _numPadView = [[LBRMNumPadView alloc] initWithFrame:numPadFrame];
     [_numPadView addTarget:self Action:@selector(numPadButtonPressed:)];
     [self.view addSubview:_numPadView];
-    
     
     
     _gridView.backgroundColor = [UIColor blackColor];
@@ -74,7 +75,7 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     for (int i = 0; i < 9; ++i){
         for (int j = 0; j < 9; ++j){
             int nextValue = [_gridModel getValueAtRow:i Column:j];
-            [_gridView setValueAtRow:i andColumn:j to:nextValue];
+            [_gridView setValueAtRow:i andColumn:j to:nextValue isInitial:YES];
         }
     }
 
@@ -93,7 +94,7 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     UIButton* numPadButton = (UIButton*)sender;
     int value = [numPadButton.titleLabel.text integerValue];
     if ([_gridModel updateValueAtRow:row Column:column withNewValue:value]) {
-        [_gridView setValueAtRow:row andColumn:column to:value];
+        [_gridView setValueAtRow:row andColumn:column to:value isInitial:NO];
     }
 }
 
