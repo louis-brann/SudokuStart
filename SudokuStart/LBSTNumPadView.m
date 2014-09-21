@@ -91,8 +91,6 @@
     
     // Update which button is currently selected
     [self setCurrentNum:(int)newButton.tag];
-    
-    NSLog(@"Button %d currently selected", [self currentNum]);
 }
 
 @end

@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Louis Brann, Rachel Macfarlane. All rights reserved.
 //
 
+// TODO: Ask grutors about constants, arrays, test setup
+
+
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
 #import "LBSTGridModel.h"
@@ -79,7 +82,7 @@
     int row = button.tag/10;
     int col = button.tag%10;
     
-    if ([_gridModel isCellMutable:row andColumn:col]){
+    if ([_gridModel isCellMutableAtRow:row andColumn:col]){
         // Check the current input for consistency
         int currentInput = [_numPadView currentNum];
         BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];

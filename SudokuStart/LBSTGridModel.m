@@ -74,6 +74,10 @@ int _currentGrid[9][9]={
 {
 //    NSNumber *nsValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
 //    return [nsValue intValue];
+    if (row < 0 | row > 8 | col < 0 | col > 8) {
+        [NSException raise:@"Out of Bounds Error" format:@"Cell %d, %d out of bounds",row,col];
+    }
+
     return _currentGrid[row][col];
 }
 
@@ -83,7 +87,7 @@ int _currentGrid[9][9]={
     _currentGrid[row][col] = value;
 }
 
--(BOOL) isCellMutable:(int)row andColumn:(int)col
+-(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col
 {
 //    if ([[_initialGrid objectAtIndex:row] objectAtIndex:col] == 0){
     if (_initialGrid[row][col] == 0) {
