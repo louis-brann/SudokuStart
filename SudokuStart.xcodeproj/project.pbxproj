@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		268C3FBF19CE518F00CD3BAC /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 268C3FC219CE518F00CD3BAC /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				268C3FC319CE519F00CD3BAC /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
 		DA07250219C247B6001F4BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250119C247B6001F4BC2 /* Foundation.framework */; };
@@ -22,7 +36,9 @@
 		DA07252319C247B6001F4BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250519C247B6001F4BC2 /* UIKit.framework */; };
 		DA07252B19C247B6001F4BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA07252919C247B6001F4BC2 /* InfoPlist.strings */; };
 		DA07252D19C247B6001F4BC2 /* SudokuStartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */; };
+		DAB82DD119CCCEA800A03907 /* LBSTGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */; };
 		DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */; };
+		DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +73,12 @@
 		DA07252819C247B6001F4BC2 /* SudokuStartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokuStartTests-Info.plist"; sourceTree = "<group>"; };
 		DA07252A19C247B6001F4BC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokuStartTests.m; sourceTree = "<group>"; };
+		DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTGridModel.h; sourceTree = "<group>"; };
+		DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTGridModel.m; sourceTree = "<group>"; };
 		DABC6CC619C946230008ECFD /* UIImage+LBSTColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LBSTColorImage.h"; sourceTree = "<group>"; };
 		DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LBSTColorImage.m"; sourceTree = "<group>"; };
+		DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTNumPadView.h; sourceTree = "<group>"; };
+		DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTNumPadView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +148,10 @@
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
 				D8AB4FA219C377550004EAD0 /* LBRMGridView.h */,
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
+				DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */,
+				DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */,
+				DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */,
+				DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */,
 				DA07251919C247B6001F4BC2 /* Images.xcassets */,
 				DA07250819C247B6001F4BC2 /* Supporting Files */,
 			);
@@ -218,6 +242,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Louis Brann, Rachel Macfarlane";
 				TargetAttributes = {
+					268C3FBF19CE518F00CD3BAC = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
 					DA07251E19C247B6001F4BC2 = {
 						TestTargetID = DA0724FD19C247B6001F4BC2;
 					};
@@ -238,6 +265,7 @@
 			targets = (
 				DA0724FD19C247B6001F4BC2 /* SudokuStart */,
 				DA07251E19C247B6001F4BC2 /* SudokuStartTests */,
+				268C3FBF19CE518F00CD3BAC /* OCLint */,
 			);
 		};
 /* End PBXProject section */
@@ -263,11 +291,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		268C3FC319CE519F00CD3BAC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.bash_profile\n\nhash oclint &> /dev/null\nif [ $? -eq 1 ]; then\necho >&2 \"oclint not found, analyzing stopped\"\nexit 1\nfi\n\n\ncd ${TARGET_TEMP_DIR}\nif [ ! -f compile_commands.json ]; then\necho \"[*] compile_commands.json not found, possibly clean was performed\"\necho \"[*] starting xcodebuild to rebuild the project..\"\n# clean previous output\nif [ -f xcodebuild.log ]; then\nrm xcodebuild.log\nfi\n\ncd ${SRCROOT}\nxcodebuild clean\n\n#build xcodebuild.log\nxcodebuild | tee ${TARGET_TEMP_DIR}/xcodebuild.log\n#xcodebuild <options>| tee ${TARGET_TEMP_DIR}/xcodebuild.log\n\necho \"[*] transforming xcodebuild.log into compile_commands.json...\"\ncd ${TARGET_TEMP_DIR}\n#transform it into compile_commands.json\noclint-xcodebuild\n\necho \"[*] copy compile_commands.json to the project root...\"\ncp ${TARGET_TEMP_DIR}/compile_commands.json ${SRCROOT}/compile_commands.json\nfi\n\necho \"[*] starting analyzing\"\ncd ${TARGET_TEMP_DIR}\noclint-json-compilation-database | sed 's/\\(.*\\.\\m\\{1,2\\}:[0-9]*:[0-9]*:\\)/\\1 warning:/'";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DA0724FA19C247B6001F4BC2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */,
+				DAB82DD119CCCEA800A03907 /* LBSTGridModel.m in Sources */,
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
@@ -322,6 +368,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		268C3FC019CE518F00CD3BAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		268C3FC119CE518F00CD3BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		DA07252E19C247B6001F4BC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -465,6 +525,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		268C3FC219CE518F00CD3BAC /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				268C3FC019CE518F00CD3BAC /* Debug */,
+				268C3FC119CE518F00CD3BAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DA0724F919C247B6001F4BC2 /* Build configuration list for PBXProject "SudokuStart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

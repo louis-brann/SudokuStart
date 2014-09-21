@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CellWasTapped
+- (void)cellWasTapped:(id)sender;
+@end
+
 @interface LBRMGridView : UIView
 
+@property (nonatomic, assign) id <CellWasTapped> delegate;
 
--(void)setValueAtRow:(int)row andColumn:(int)col to:(int)value;
+-(void)setValue:(int)value atRow:(int)row andColumn:(int)col;
 
 @end

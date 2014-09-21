@@ -6,24 +6,17 @@
 //  Copyright (c) 2014 Louis Brann, Rachel Macfarlane. All rights reserved.
 //
 
+
 #import "LBRMViewController.h"
 #import "LBRMGridView.h"
-
-int initialGrid[9][9]={
-    {7,0,0,4,2,0,0,0,9},
-    {0,0,9,5,0,0,0,0,4},
-    {0,2,0,6,9,0,5,0,0},
-    {6,5,0,0,0,0,4,3,0},
-    {0,8,0,0,0,6,0,0,7},
-    {0,1,0,0,4,5,6,0,0},
-    {0,0,0,8,6,0,0,0,2},
-    {3,4,0,9,0,0,1,0,0},
-    {8,0,0,3,0,2,7,4,0}
-};
+#import "LBSTGridModel.h"
+#import "LBSTNumPadView.h"
 
 
 @interface LBRMViewController (){
-    LBRMGridView* _gridView;
+    LBRMGridView *_gridView;
+    LBSTNumPadView *_numPadView;
+    LBSTGridModel *_gridModel;
 }
 
 @end
@@ -34,31 +27,50 @@ int initialGrid[9][9]={
 {
     [super viewDidLoad];
     
-	// Set up the grid frame, based on a specified percentage of the frame that
-    //   the grid is supposed to take up
+    // Get frame and frame dimensions
     CGRect frame = self.view.frame;
-    CGFloat pctOfFrame = 0.80;
-    CGFloat width = CGRectGetWidth(frame);
-    CGFloat height = CGRectGetHeight(frame);
-    CGFloat x = 0.1 * width;
-    CGFloat y = 0.1 * height;
-    CGFloat size = MIN(width,height)*pctOfFrame;
- 
-    CGRect gridFrame = CGRectMake(x, y, size, size);
+    CGFloat frameWidth = CGRectGetWidth(frame);
+    CGFloat frameHeight = CGRectGetHeight(frame);
+    
+    // Set up the grid frame, based on a specified percentage of the frame that
+    //   the grid is supposed to take up
+    CGFloat gridPctOfFrame = 0.80;
+    CGFloat gridXOffset = 0.1 * frameWidth;
+    CGFloat gridYOffset = 0.1 * frameHeight;
+    CGFloat gridSize = MIN(frameWidth, frameHeight) * gridPctOfFrame;
+    CGRect gridFrame = CGRectMake(gridXOffset, gridYOffset, gridSize, gridSize);
     
     // Create grid view
     _gridView = [[LBRMGridView alloc] initWithFrame:gridFrame];
+    _gridView.delegate = self;
     _gridView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_gridView];
     
-    for (int i = 0; i < 9; ++i){
-        for (int j = 0; j < 9; ++j){
-            [_gridView setValueAtRow:i andColumn:j to:initialGrid[i][j]];
+    // Initialize GridModel and initialize grid
+    _gridModel = [[LBSTGridModel alloc] init];
+    _gridModel.delegate = self;
+    [_gridModel initializeGrid];
+  
+    
+    // For every button, find the initial value from gridModel and set it in the
+    // gridView
+    for (int row = 0; row < 9; ++row){
+        for (int col = 0; col < 9; ++col){
+            int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
+            [_gridView setValue:numberToSet atRow:row andColumn:col];
         }
     }
     
+    // Create numPad frame
+    CGFloat numPadWidth = gridSize;
+    CGFloat numPadHeight = (gridSize/10.0) * 1.2;
+    CGFloat numPadYOffset = (1.25 * gridYOffset) + CGRectGetHeight(gridFrame);
+    CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
     
-    
+    // Create numPad view
+    _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
+    _numPadView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_numPadView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,5 +79,33 @@ int initialGrid[9][9]={
     // Dispose of any resources that can be recreated.
 }
 
+- (void)cellWasTapped:(id)sender
+{
+    UIButton *button = (UIButton*)sender;
+    int row = (int)button.tag / 10;
+    int col = (int)button.tag % 10;
+    
+    if ([_gridModel isCellMutableAtRow:row andColumn:col]){
+        // Check the current input for consistency
+        int currentInput = [_numPadView currentNum];
+        BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];
+        
+        // If it's consistent, set the value
+        if (consistentInput){
+            [_gridModel setValue:currentInput atRow:row andColumn:col];
+            [_gridView setValue:currentInput atRow:row andColumn:col];
+        }
+    }
+}
+
+- (void)alertWin
+{
+  UIAlertView *winAlert = [[UIAlertView alloc] initWithTitle:@"Congratulations!"
+                                                     message:@"You've won!"
+                                                    delegate:self
+                                           cancelButtonTitle:@"Yeah!"
+                                           otherButtonTitles: nil];
+  [winAlert show];
+}
 
 @end
