@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LBRMViewController : UIViewController
-    @property (weak, nonatomic) UIButton* _checkSolutionButton;
+
+@property (weak, nonatomic) IBOutlet UIButton* checkSolutionButton;
+@property (weak, nonatomic) IBOutlet UILabel* hasWonLabel;
+
+- (IBAction)checkSolutionButtonPressed:(id)sender;
 
 @end

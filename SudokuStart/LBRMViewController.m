@@ -79,7 +79,8 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
         }
     }
 
-    
+    // Ensure the has won label has a text color other than white
+    [_hasWonLabel setTextColor:[UIColor blackColor]];
 }
 
 
@@ -106,6 +107,17 @@ static double const heightOfNumPadRelativeToGridSize = 0.12;
     _selectedCell.backgroundColor = [UIColor yellowColor];
     NSLog(@"Row: %d, Column: %d", button.tag % 10 + 1, button.tag / 10 + 1);
     
+}
+
+- (IBAction)checkSolutionButtonPressed:(id)sender
+{
+    if ([_gridModel checkGridIsSolved]) {
+        _hasWonLabel.text = @"You win";
+    } else {
+        _hasWonLabel.text = @"You haven't won yet";
+    }
+    
+    [_hasWonLabel sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning
