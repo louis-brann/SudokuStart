@@ -14,26 +14,37 @@
   NSMutableArray *_currentGrid;
 }
 
-- (void) initializeGrid
-{
-  // Generate new grid (not needed now)
-  int regularGrid[9][9]={
-      {7,0,0,4,2,0,0,0,9},
-      {0,0,9,5,0,0,0,0,4},
-      {0,2,0,6,9,0,5,0,0},
-      {6,5,0,0,0,0,4,3,0},
-      {0,8,0,0,0,6,0,0,7},
-      {0,1,0,0,4,5,6,0,0},
-      {0,0,0,8,6,0,0,0,2},
-      {3,4,0,9,0,0,1,0,0},
-      {8,0,0,3,0,2,7,4,0}
-  };
+- (NSString *) getGridString:(int)gridNumber {
+  // Determine which file the chosen grid is in
+  int gridFile = gridNumber / 30000;
+  
+  NSString *path;
+  NSError *error;
+  
+  // Choose the correct path to the file
+  if (gridFile == 0) {
+    path = [[NSBundle mainBundle] pathForResource:@"grid1" ofType:@"txt"];
+  } else {
+    path = [[NSBundle mainBundle] pathForResource:@"grid2" ofType:@"txt"];
+  }
+  
+  NSString *gridString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+  
+  // Get the substring of 81 chars for the chosen grid
+  int gridSubstringStartIndex = (gridNumber - (gridFile * 30000)) * 82;
+  NSString *gridSubstring = [gridString substringWithRange:NSMakeRange(gridSubstringStartIndex, 81)];
+  
+  return gridSubstring;
+}
 
+- (void) parseGridString:(NSString *)gridString {
+  
   // Put in initialGrid and currentGrid, counting 0s while going through
   _initialGrid = [[NSMutableArray alloc] initWithCapacity:9];
   _currentGrid = [[NSMutableArray alloc] initWithCapacity:9];
   _numBlankCells = 0;
-
+  NSNumber *numberToAdd;
+  
   // It returned an out of bounds error after trying to add to empty nested arrays,
   // so we made the inner arrays first, then added
   for (int row = 0; row < 9; ++row){
@@ -42,7 +53,15 @@
     NSMutableArray *currRowArray = [[NSMutableArray alloc] initWithCapacity:9];
     
     for (int col = 0; col < 9; ++col){
-      NSNumber *numberToAdd =[NSNumber numberWithInt:regularGrid[row][col]];
+      int currentNumberPosition = (row * 9) + col;
+      NSString *currentNumberString = [gridString substringWithRange:NSMakeRange(currentNumberPosition, 1)];
+      
+      if ([currentNumberString isEqualToString:@"."]) {
+        numberToAdd = [NSNumber numberWithInt:0];
+      } else {
+        numberToAdd =[NSNumber numberWithInt:[currentNumberString intValue]];
+      }
+      
       if ([numberToAdd intValue] == 0){
         ++_numBlankCells;
       }
@@ -54,10 +73,20 @@
     [_initialGrid addObject:initRowArray];
     [_currentGrid addObject:currRowArray];
   }
-
 }
 
-- (int) getValueAtRow:(int)row andColumn:(int) col
+- (void) initializeGrid
+{
+  // Choose a random grid to initialize the board with
+  int randomGridNumber = arc4random_uniform(60000);
+  NSLog(@"Grid chosen: %d", randomGridNumber);
+  
+  NSString* randomGridString = [self getGridString:59999];
+  [self parseGridString:randomGridString];
+  
+}
+
+- (int) getValueAtRow:(int)row andColumn:(int)col
 {
   NSNumber *nsValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
   return [nsValue intValue];

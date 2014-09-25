@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B219D4B0E000EED6C9 /* grid1.txt */; };
+		2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B319D4B0E000EED6C9 /* grid2.txt */; };
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
 		DA07250219C247B6001F4BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250119C247B6001F4BC2 /* Foundation.framework */; };
 		DA07250419C247B6001F4BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250319C247B6001F4BC2 /* CoreGraphics.framework */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2656A3B219D4B0E000EED6C9 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
+		2656A3B319D4B0E000EED6C9 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
 		D8AB4FA219C377550004EAD0 /* LBRMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGridView.h; sourceTree = "<group>"; };
 		D8AB4FA319C377550004EAD0 /* LBRMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGridView.m; sourceTree = "<group>"; };
 		DA0724FE19C247B6001F4BC2 /* SudokuStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +156,8 @@
 				DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */,
 				DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */,
 				DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */,
+				2656A3B219D4B0E000EED6C9 /* grid1.txt */,
+				2656A3B319D4B0E000EED6C9 /* grid2.txt */,
 				DA07251919C247B6001F4BC2 /* Images.xcassets */,
 				DA07250819C247B6001F4BC2 /* Supporting Files */,
 			);
@@ -277,7 +283,9 @@
 			files = (
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
+				2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
+				2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,6 +540,7 @@
 				268C3FC119CE518F00CD3BAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DA0724F919C247B6001F4BC2 /* Build configuration list for PBXProject "SudokuStart" */ = {
 			isa = XCConfigurationList;

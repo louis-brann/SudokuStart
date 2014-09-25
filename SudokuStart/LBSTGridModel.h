@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <stdlib.h>
 
 @protocol AlertWin
 -(void)alertWin;

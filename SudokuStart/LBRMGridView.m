@@ -63,7 +63,17 @@ static CGFloat const IPAD_FONT_SIZE = 40;
                                               buttonSize,
                                               buttonSize);
               button = [[UIButton alloc] initWithFrame:buttonFrame];
+            
+              int xSubgrid = col / 3;
+              int ySubgrid = row / 3;
+            
+            if (abs(xSubgrid - ySubgrid) % 2 == 1) {
+              button.backgroundColor = [UIColor colorWithRed:0.81 green:0.81 blue:0.81 alpha:1.0];
+            }
+            else {
               button.backgroundColor = [UIColor whiteColor];
+            }
+            
               [self addSubview: button];
               
               // Create target for button
