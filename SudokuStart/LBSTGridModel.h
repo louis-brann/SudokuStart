@@ -24,5 +24,6 @@
 -(BOOL) isValueConsistent:(int)input atRow:(int)row andColumn:(int)col;
 -(BOOL) isCurrentGridConsistentWithValue:(int)value atRow:(int)row andColumn:(int)col;
 -(BOOL) isWinning;
+-(void) clearGrid;
 
 @end

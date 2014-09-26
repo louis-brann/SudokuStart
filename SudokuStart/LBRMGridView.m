@@ -81,7 +81,6 @@ static CGFloat const IPAD_FONT_SIZE = 40;
               
               // Set up title
               [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-              button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:IPAD_FONT_SIZE];
               button.titleLabel.adjustsFontSizeToFitWidth = YES;
               
               // Set up highlighted background
@@ -116,8 +115,7 @@ static CGFloat const IPAD_FONT_SIZE = 40;
 
 -(void)setValue:(int)value atRow:(int)row andColumn:(int)col
 {
-    CGFloat IPAD_FONT_SIZE = 40;
-    
+
     UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
     
     // If the value is not 0, convert it into a string for the button title
@@ -126,8 +124,10 @@ static CGFloat const IPAD_FONT_SIZE = 40;
     if (value != 0){
         NSString *numberToDisplay = [NSString stringWithFormat:@"%d", value];
         [button setTitle:numberToDisplay forState:UIControlStateNormal];
+      button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:IPAD_FONT_SIZE];
     
     } else {
+        [button setTitle:@"" forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:IPAD_FONT_SIZE];
     }
     

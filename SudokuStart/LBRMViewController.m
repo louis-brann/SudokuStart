@@ -23,6 +23,8 @@
 
 @implementation LBRMViewController
 
+static CGFloat const IPAD_FONT_SIZE = 30;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,8 +32,8 @@
     // Get frame and frame dimensions
     CGRect frame = self.view.frame;
     CGFloat frameWidth = CGRectGetWidth(frame);
-    CGFloat frameHeight = CGRectGetHeight(frame);
-    
+  CGFloat frameHeight = CGRectGetHeight(frame);
+  
     // Set up the grid frame, based on a specified percentage of the frame that
     //   the grid is supposed to take up
     CGFloat gridPctOfFrame = 0.80;
@@ -49,18 +51,9 @@
     // Initialize GridModel and initialize grid
     _gridModel = [[LBSTGridModel alloc] init];
     _gridModel.delegate = self;
-    [_gridModel initializeGrid];
   
-    
-    // For every button, find the initial value from gridModel and set it in the
-    // gridView
-    for (int row = 0; row < 9; ++row){
-        for (int col = 0; col < 9; ++col){
-            int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
-            [_gridView setValue:numberToSet atRow:row andColumn:col];
-        }
-    }
-    
+    [self startNewGame];
+  
     // Create numPad frame
     CGFloat numPadWidth = gridSize;
     CGFloat numPadHeight = (gridSize/10.0) * 1.2;
@@ -71,6 +64,32 @@
     _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
     _numPadView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:_numPadView];
+  
+    // New game button frame
+    CGFloat cellSize = gridSize/(9.0 + 1.0);
+    CGFloat newGameButtonBorder = cellSize/10.0;
+    CGFloat newGameButtonWidth = (3 * cellSize) + (4 * newGameButtonBorder);
+    CGFloat newGameButtonHeight = cellSize + (2 * newGameButtonBorder);
+    CGFloat newGameButtonXOffset = gridXOffset + cellSize + newGameButtonBorder;
+    CGFloat newGameButtonYOffset = (0.25 * gridYOffset) + numPadYOffset + numPadHeight;
+    CGRect  newGameFrame = CGRectMake(newGameButtonXOffset,
+                                      newGameButtonYOffset,
+                                      newGameButtonWidth,
+                                      newGameButtonHeight);
+  
+    // Make new game button
+    UIButton *newGameButton = [[UIButton alloc] initWithFrame:newGameFrame];
+    newGameButton.backgroundColor = [UIColor blackColor];
+    [newGameButton setTitle:@"Start New Game" forState:UIControlStateNormal];
+    [newGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  [newGameButton setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
+    newGameButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    newGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [self.view addSubview:newGameButton];
+  
+    [newGameButton addTarget:self action:@selector(startNewGame)forControlEvents:UIControlEventTouchUpInside];
+    
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,6 +125,22 @@
                                            cancelButtonTitle:@"Yeah!"
                                            otherButtonTitles: nil];
   [winAlert show];
+}
+
+-(void)startNewGame
+{
+  [_gridModel clearGrid];
+  [_gridModel initializeGrid];
+  
+  // For every button, find the initial value from gridModel and set it in the
+  // gridView
+  for (int row = 0; row < 9; ++row){
+    for (int col = 0; col < 9; ++col){
+      int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
+      [_gridView setValue:numberToSet atRow:row andColumn:col];
+    }
+  }
+  
 }
 
 @end

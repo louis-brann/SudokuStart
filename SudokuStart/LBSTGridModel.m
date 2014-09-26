@@ -79,9 +79,8 @@
 {
   // Choose a random grid to initialize the board with
   int randomGridNumber = arc4random_uniform(60000);
-  NSLog(@"Grid chosen: %d", randomGridNumber);
   
-  NSString* randomGridString = [self getGridString:59999];
+  NSString* randomGridString = [self getGridString:randomGridNumber];
   [self parseGridString:randomGridString];
   
 }
@@ -215,5 +214,14 @@
   
   return YES;
 }
+
+-(void)clearGrid
+{
+  NSLog(@"Clear grid exists");
+  [_initialGrid removeAllObjects];
+  [_currentGrid removeAllObjects];
+}
+
+
 
 @end
