@@ -79,12 +79,11 @@ static CGFloat const IPAD_FONT_SIZE = 30;
   
     // Make new game button
     UIButton *newGameButton = [[UIButton alloc] initWithFrame:newGameFrame];
-    newGameButton.backgroundColor = [UIColor blackColor];
-    [newGameButton setTitle:@"Start New Game" forState:UIControlStateNormal];
-    [newGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-  [newGameButton setTitleColor:[UIColor yellowColor] forState:UIControlStateHighlighted];
-    newGameButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
-    newGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+  
+    UIImage *newGameButtonNormalImage = [UIImage imageNamed:@"newgame-normal.png"];
+    UIImage *newGameButtonHighlightImage = [UIImage imageNamed:@"newgame-highlight.png"];
+    [newGameButton setImage:newGameButtonNormalImage forState:UIControlStateNormal];
+    [newGameButton setImage:newGameButtonHighlightImage forState:UIControlStateHighlighted];
     [self.view addSubview:newGameButton];
   
     [newGameButton addTarget:self action:@selector(startNewGame)forControlEvents:UIControlEventTouchUpInside];

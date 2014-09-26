@@ -217,7 +217,6 @@
 
 -(void)clearGrid
 {
-  NSLog(@"Clear grid exists");
   [_initialGrid removeAllObjects];
   [_currentGrid removeAllObjects];
 }
