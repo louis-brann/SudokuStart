@@ -41,14 +41,14 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       button.tag = buttonNum;
       
       // Make button 1 the default selected button
-      UIColor *NUMPAD_NORMAL_COLOR = [UIColor greenColor];
-      UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
+      UIImage *numpadNormalImage = [UIImage imageNamed:@"numpad-normal.png"];
+      UIImage *numpadSelectedImage = [UIImage imageNamed:@"numpad-highlight.png"];
       if (buttonNum == 1) {
         [self setCurrentNum:buttonNum];
-        button.backgroundColor = NUMPAD_SELECT_COLOR;
+        [button setBackgroundImage:numpadSelectedImage forState:UIControlStateNormal];
       }
       else {
-        button.backgroundColor = NUMPAD_NORMAL_COLOR;
+        [button setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
       }
       
       // Set up title
@@ -74,18 +74,18 @@ static CGFloat const IPAD_FONT_SIZE = 30;
 
 - (void)numSelected:(id)sender
 {
-    UIColor *NUMPAD_NORMAL_COLOR = [UIColor greenColor];
-    UIColor *NUMPAD_SELECT_COLOR = [UIColor orangeColor];
-    
-    UIButton *newButton = (UIButton*)sender;
-    UIButton *oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
-    
-    // Change the background colors appropriately
-    oldButton.backgroundColor = NUMPAD_NORMAL_COLOR;
-    newButton.backgroundColor = NUMPAD_SELECT_COLOR;
-    
-    // Update which button is currently selected
-    [self setCurrentNum:(int)newButton.tag];
+  UIImage *numpadNormalImage = [UIImage imageNamed:@"numpad-normal.png"];
+  UIImage *numpadSelectedImage = [UIImage imageNamed:@"numpad-highlight.png"];
+
+  UIButton *newButton = (UIButton*)sender;
+  UIButton *oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
+  
+  // Change the background colors appropriately
+  [oldButton setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
+  [newButton setBackgroundImage:numpadSelectedImage forState:UIControlStateNormal];
+
+  // Update which button is currently selected
+  [self setCurrentNum:(int)newButton.tag];
 }
 
 @end

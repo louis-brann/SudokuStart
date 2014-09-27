@@ -80,7 +80,7 @@
   // Choose a random grid to initialize the board with
   int randomGridNumber = arc4random_uniform(60000);
   
-  NSString* randomGridString = [self getGridString:randomGridNumber];
+  NSString *randomGridString = [self getGridString:randomGridNumber];
   [self parseGridString:randomGridString];
   
 }
@@ -112,12 +112,12 @@
 // Mutable if empty in initial grid
 -(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col
 {
-    NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:col];
-    if ([nsValue intValue] == 0){
-        return YES;
-    } else {
-        return NO;
-    }
+  NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:col];
+  if ([nsValue intValue] == 0){
+    return YES;
+  } else {
+    return NO;
+  }
 }
 
 // Checks values for consistency against initial values upon being input
@@ -125,37 +125,37 @@
 //   when values are being input, and initial values cannot be overwritten
 -(BOOL) isValueConsistent:(int)value atRow:(int)row andColumn:(int)col
 {
-    // Check the row of the value
-    for (int i = 0; i < 9; ++i) {
-      NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:i];
-        if ([nsValue intValue] == value) {
-            return NO;
-        }
-    }
-
-    // Check the column of the value
-    for (int i = 0; i < 9; ++i) {
-      NSNumber *nsValue = [[_initialGrid objectAtIndex:i] objectAtIndex:col];
+  // Check the row of the value
+  for (int i = 0; i < 9; ++i) {
+    NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:i];
       if ([nsValue intValue] == value) {
-            return NO;
-        }
+          return NO;
+      }
+  }
+
+  // Check the column of the value
+  for (int i = 0; i < 9; ++i) {
+    NSNumber *nsValue = [[_initialGrid objectAtIndex:i] objectAtIndex:col];
+    if ([nsValue intValue] == value) {
+      return NO;
     }
-    
-    // Check the subgrid of the value
-    int subgridRowStart = row - (row % 3);
-    int subgridColStart = col - (col % 3);
-    
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
-          NSNumber *nsValue = [[_initialGrid objectAtIndex:subgridRowStart+i] objectAtIndex:subgridColStart+j];
-          if ([nsValue intValue] == value) {
-                return NO;
-            }
-        }
+  }
+  
+  // Check the subgrid of the value
+  int subgridRowStart = row - (row % 3);
+  int subgridColStart = col - (col % 3);
+  
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+      NSNumber *nsValue = [[_initialGrid objectAtIndex:subgridRowStart+i] objectAtIndex:subgridColStart+j];
+      if ([nsValue intValue] == value) {
+        return NO;
+      }
     }
-    
-    // Otherwise, the value is consistent
-      return YES;
+  }
+  
+  // Otherwise, the value is consistent
+  return YES;
 }
 
 -(BOOL)isCurrentGridConsistentWithValue:(int)value atRow:(int)row andColumn:(int)col
@@ -220,7 +220,5 @@
   [_initialGrid removeAllObjects];
   [_currentGrid removeAllObjects];
 }
-
-
 
 @end

@@ -27,12 +27,17 @@
     [super tearDown];
 }
 
+// All tests implicitly test parseGridString
+
 // Test getValue
 // Assumes that the inputs row, col to getValue will be in the range [0,8]
 - (void) testGetValues
 {
     LBSTGridModel *testModel = [[LBSTGridModel alloc] init];
-    XCTAssertTrue([testModel getValueAtRow:2 andColumn:6] == 5, @"Testing value at 2,6");
+    NSString* testGrid = @"7..6...38..2581.4..9.......456...8932.9..46......65..2..54.6.17...3....494..7.2..";
+    [testModel parseGridString:testGrid];
+  
+    XCTAssertTrue([testModel getValueAtRow:6 andColumn:2] == 5, @"Testing value at 6,2");
     XCTAssertTrue([testModel getValueAtRow:0 andColumn:0] == 7, @"Testing value at 0,0");
     XCTAssertTrue([testModel getValueAtRow:8 andColumn:8] == 0, @"Testing value at 8,8");
 }
@@ -43,18 +48,20 @@
 - (void) testSetValues
 {
     LBSTGridModel *testModel = [[LBSTGridModel alloc] init];
+    NSString* testGrid = @"7..6...38..2581.4..9.......456...8932.9..46......65..2..54.6.17...3....494..7.2..";
+    [testModel parseGridString:testGrid];
+  
+    XCTAssertTrue([testModel getValueAtRow:2 andColumn:6] == 0, @"Ensure cell 2,6 is empty");
+    [testModel setValue:2 atRow:2 andColumn:6];
+    XCTAssertTrue([testModel getValueAtRow:2 andColumn:6] == 2, @"Ensure value 2 was set at 2,6");
+    [testModel setValue:3 atRow:2 andColumn:6];
+    XCTAssertTrue([testModel getValueAtRow:2 andColumn:6] == 3, @"Ensure value 3 was set at 2,6");
     
-    XCTAssertTrue([testModel getValueAtRow:6 andColumn:2] == 0, @"Ensure cell 6,2 is empty");
-    [testModel setValue:2 atRow:6 andColumn:2];
-    XCTAssertTrue([testModel getValueAtRow:6 andColumn:2] == 2, @"Ensure value 2 was set at 6,2");
-    [testModel setValue:3 atRow:6 andColumn:2];
-    XCTAssertTrue([testModel getValueAtRow:6 andColumn:2] == 3, @"Ensure value 3 was set at 6,2");
-    
-    XCTAssertTrue([testModel getValueAtRow:2 andColumn:5] == 0, @"Ensure cell 2,5 is empty");
-    [testModel setValue:1 atRow:2 andColumn:5];
-    XCTAssertTrue([testModel getValueAtRow:2 andColumn:5] == 1, @"Ensure value 1 was set at 2,5");
-    [testModel setValue:8 atRow:2 andColumn:5];
-    XCTAssertTrue([testModel getValueAtRow:2 andColumn:5] == 8, @"Ensure value 8 was set at 2,5");
+    XCTAssertTrue([testModel getValueAtRow:5 andColumn:2] == 0, @"Ensure cell 5,2 is empty");
+    [testModel setValue:1 atRow:5 andColumn:2];
+    XCTAssertTrue([testModel getValueAtRow:5 andColumn:2] == 1, @"Ensure value 1 was set at 5,2");
+    [testModel setValue:8 atRow:5 andColumn:2];
+    XCTAssertTrue([testModel getValueAtRow:5 andColumn:2] == 8, @"Ensure value 8 was set at 5,2");
 }
 
 // Test isMutable
@@ -62,10 +69,12 @@
 - (void) testIsMutable
 {
     LBSTGridModel *testModel = [[LBSTGridModel alloc] init];
-    
-    XCTAssertTrue([testModel isCellMutableAtRow:1 andColumn:0], @"Test that cell 1,0 is mutable");
+    NSString* testGrid = @"7..6...38..2581.4..9.......456...8932.9..46......65..2..54.6.17...3....494..7.2..";
+    [testModel parseGridString:testGrid];
+  
+    XCTAssertTrue([testModel isCellMutableAtRow:0 andColumn:1], @"Test that cell 0,1 is mutable");
     XCTAssertFalse([testModel isCellMutableAtRow:0 andColumn:0], @"Test that cell 0,0 is not mutable");
-    XCTAssertTrue([testModel isCellMutableAtRow:7 andColumn:8], @"Test that cell 7,8 is mutable");
+    XCTAssertTrue([testModel isCellMutableAtRow:8 andColumn:7], @"Test that cell 8,7 is mutable");
 }
 
 // Test isConsistent
@@ -74,13 +83,28 @@
 - (void) testIsConsistent
 {
     LBSTGridModel *testModel = [[LBSTGridModel alloc] init];
-    
-    XCTAssertTrue([testModel isValueConsistent:1 atRow:0 andColumn:2], @"Test if 1 is consistent at 0,2");
+    NSString* testGrid = @"7..6...38..2581.4..9.......456...8932.9..46......65..2..54.6.17...3....494..7.2..";
+    [testModel parseGridString:testGrid];
+  
+    XCTAssertTrue([testModel isValueConsistent:1 atRow:2 andColumn:0], @"Test if 1 is consistent at 2,0");
     
     // Ensure that inconsistencies are found for row, col, and subgrid
-    XCTAssertFalse([testModel isValueConsistent:4 atRow:7 andColumn:5], @"Test that 4 is not consistent at 7,5");
-    XCTAssertFalse([testModel isValueConsistent:9 atRow:6 andColumn:2], @"Test that 9 is not consistent at 6,2");
-    XCTAssertFalse([testModel isValueConsistent:9 atRow:6 andColumn:5], @"Test that 9 is not consistent at 6,5");
+    XCTAssertFalse([testModel isValueConsistent:4 atRow:5 andColumn:7], @"Test that 4 is not consistent at 5,7");
+    XCTAssertFalse([testModel isValueConsistent:9 atRow:2 andColumn:6], @"Test that 9 is not consistent at 2,6");
+    XCTAssertFalse([testModel isValueConsistent:9 atRow:5 andColumn:6], @"Test that 9 is not consistent at 5,6");
+}
+
+// Test isWinning
+- (void) testIsWinning
+{
+  LBSTGridModel *testModel = [[LBSTGridModel alloc] init];
+  
+  NSString *nearWinningBoard = @"96152843743761958258243796182619375475926431831487562917534289664398127529875614.";
+  [testModel parseGridString:nearWinningBoard];
+  int lastValue = 3;
+  [testModel setValue:lastValue atRow:8 andColumn:8];
+  
+  XCTAssertTrue([testModel isWinning], @"Confirm that a winning board is found to be correct");
 }
 
 @end

@@ -26,4 +26,7 @@
 -(BOOL) isWinning;
 -(void) clearGrid;
 
+// public for testing
+- (void) parseGridString:(NSString *)gridString;
+
 @end
