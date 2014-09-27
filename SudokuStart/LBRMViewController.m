@@ -11,12 +11,14 @@
 #import "LBRMGridView.h"
 #import "LBSTGridModel.h"
 #import "LBSTNumPadView.h"
+#import "LBSTTimerView.h"
 
 
 @interface LBRMViewController (){
-    LBRMGridView *_gridView;
-    LBSTNumPadView *_numPadView;
-    LBSTGridModel *_gridModel;
+  LBRMGridView *_gridView;
+  LBSTNumPadView *_numPadView;
+  LBSTGridModel *_gridModel;
+  LBSTTimerView *_timerView;
 }
 
 @end
@@ -50,8 +52,6 @@
   _gridModel = [[LBSTGridModel alloc] init];
   _gridModel.delegate = self;
 
-  [self startNewGame];
-
   // Create numPad frame
   CGFloat numPadWidth = gridSize;
   CGFloat numPadHeight = (gridSize/10.0) * 1.2;
@@ -77,14 +77,36 @@
 
   // Make new game button
   UIButton *newGameButton = [[UIButton alloc] initWithFrame:newGameFrame];
-
-  UIImage *newGameButtonNormalImage = [UIImage imageNamed:@"newgame-normal.png"];
-  UIImage *newGameButtonHighlightImage = [UIImage imageNamed:@"newgame-highlight.png"];
-  [newGameButton setImage:newGameButtonNormalImage forState:UIControlStateNormal];
-  [newGameButton setImage:newGameButtonHighlightImage forState:UIControlStateHighlighted];
+  
   [self.view addSubview:newGameButton];
+  
+  // Style the button
+  CGFloat newGameButtonFontSize = 24;
+  [newGameButton setTitle:@"Start New Game" forState:UIControlStateNormal];
+  newGameButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:newGameButtonFontSize];
+  newGameButton.titleLabel.textColor = [UIColor whiteColor];
+  newGameButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+  UIImage *newGameButtonNormalImage = [UIImage imageNamed:@"bluebg-normal.png"];
+  UIImage *newGameButtonHighlightImage = [UIImage imageNamed:@"bluebg-highlight.png"];
+  [newGameButton setBackgroundImage:newGameButtonNormalImage forState:UIControlStateNormal];
+  [newGameButton setBackgroundImage:newGameButtonHighlightImage forState:UIControlStateHighlighted];
 
   [newGameButton addTarget:self action:@selector(startNewGame)forControlEvents:UIControlEventTouchUpInside];
+  
+  // Set up timer
+  CGFloat timerWidth = newGameButtonWidth;
+  CGFloat timerHeight = newGameButtonHeight;
+  CGFloat timerXOffset = frameWidth - (newGameButtonXOffset + newGameButtonWidth);
+  CGFloat timerYOffset = newGameButtonYOffset;
+  CGRect  timerFrame = CGRectMake(timerXOffset, timerYOffset, timerWidth, timerHeight);
+  
+  _timerView = [[LBSTTimerView alloc] initWithFrame:timerFrame];
+  UIColor *timerBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebg-normal.png"]];
+  [_timerView setBackgroundColor:timerBackgroundColor];
+  [self.view addSubview:_timerView];
+  
+  [self startNewGame];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,10 +154,11 @@
   for (int row = 0; row < 9; ++row){
     for (int col = 0; col < 9; ++col){
       int numberToSet = [_gridModel getValueAtRow:row andColumn:col];
-      [_gridView setValue:numberToSet atRow:row andColumn:col];
+      [_gridView setInitialValue:numberToSet atRow:row andColumn:col];
     }
   }
   
+  [_timerView startTimer];
 }
 
 @end

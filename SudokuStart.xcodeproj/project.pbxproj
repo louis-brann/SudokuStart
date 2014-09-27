@@ -23,6 +23,8 @@
 /* Begin PBXBuildFile section */
 		2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B219D4B0E000EED6C9 /* grid1.txt */; };
 		2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B319D4B0E000EED6C9 /* grid2.txt */; };
+		26E82F8619D7343B005C990B /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26E82F8519D7343B005C990B /* click.mp3 */; };
+		26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E82F8819D737F5005C990B /* LBSTTimerView.m */; };
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
 		DA07250219C247B6001F4BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250119C247B6001F4BC2 /* Foundation.framework */; };
 		DA07250419C247B6001F4BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250319C247B6001F4BC2 /* CoreGraphics.framework */; };
@@ -56,6 +58,9 @@
 /* Begin PBXFileReference section */
 		2656A3B219D4B0E000EED6C9 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
 		2656A3B319D4B0E000EED6C9 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
+		26E82F8519D7343B005C990B /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
+		26E82F8719D737F5005C990B /* LBSTTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTTimerView.h; sourceTree = "<group>"; };
+		26E82F8819D737F5005C990B /* LBSTTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTTimerView.m; sourceTree = "<group>"; };
 		D8AB4FA219C377550004EAD0 /* LBRMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGridView.h; sourceTree = "<group>"; };
 		D8AB4FA319C377550004EAD0 /* LBRMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGridView.m; sourceTree = "<group>"; };
 		DA0724FE19C247B6001F4BC2 /* SudokuStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +114,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26E82F8419D7342B005C990B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				26E82F8519D7343B005C990B /* click.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		DA0724F519C247B6001F4BC2 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +163,8 @@
 				DA07251319C247B6001F4BC2 /* Main.storyboard */,
 				DA07251619C247B6001F4BC2 /* LBRMViewController.h */,
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
+				26E82F8719D737F5005C990B /* LBSTTimerView.h */,
+				26E82F8819D737F5005C990B /* LBSTTimerView.m */,
 				D8AB4FA219C377550004EAD0 /* LBRMGridView.h */,
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
 				DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */,
@@ -167,6 +182,7 @@
 		DA07250819C247B6001F4BC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				26E82F8419D7342B005C990B /* Audio */,
 				DA07250919C247B6001F4BC2 /* SudokuStart-Info.plist */,
 				DA07250A19C247B6001F4BC2 /* InfoPlist.strings */,
 				DA07250D19C247B6001F4BC2 /* main.m */,
@@ -284,6 +300,7 @@
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
 				2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */,
+				26E82F8619D7343B005C990B /* click.mp3 in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
 				2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */,
 			);
@@ -323,6 +340,7 @@
 				DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */,
 				DAB82DD119CCCEA800A03907 /* LBSTGridModel.m in Sources */,
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
+				26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
 				DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */,

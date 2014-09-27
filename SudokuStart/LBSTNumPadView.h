@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface LBSTNumPadView : UIView
 
 @property (nonatomic) int currentNum;
+@property (nonatomic) AVAudioPlayer *audioPlayer;
 
 @end

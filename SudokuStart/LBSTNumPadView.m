@@ -23,6 +23,14 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     // Initialize the array
     _numbers = [[NSMutableArray alloc] initWithCapacity:9];
     
+    // Set up button click audio
+    NSError *error;
+    NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"click" ofType:@"mp3"];
+    NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+    AVAudioPlayer *numpadPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+    [numpadPlayer prepareToPlay];
+    self.audioPlayer = numpadPlayer;
+    
     // Set up button size and offset
     CGFloat buttonSize = frame.size.width / 10.0;
     CGFloat baseOffset = buttonSize / 10.0;
@@ -74,6 +82,9 @@ static CGFloat const IPAD_FONT_SIZE = 30;
 
 - (void)numSelected:(id)sender
 {
+  // Play a sound effect!
+  [self.audioPlayer play];
+  
   UIImage *numpadNormalImage = [UIImage imageNamed:@"numpad-normal.png"];
   UIImage *numpadSelectedImage = [UIImage imageNamed:@"numpad-highlight.png"];
 

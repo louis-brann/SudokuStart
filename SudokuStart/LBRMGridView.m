@@ -111,17 +111,31 @@ static CGFloat const IPAD_FONT_SIZE = 40;
   UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
   
   // If the value is not 0, convert it into a string for the button title
-  // Otherwise, it is blank, but not initial, so set the font lighter so the
+  // Otherwise, it is blank
+  if (value != 0){
+    NSString *numberToDisplay = [NSString stringWithFormat:@"%d", value];
+    [button setTitle:numberToDisplay forState:UIControlStateNormal];
+  }
+  else {
+    [button setTitle:@"" forState:UIControlStateNormal];
+  }
+}
+
+-(void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col
+{
+  UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
+  
+  // If the value is not 0, it is an initial value, so make it bold
+  // Otherwise, it is not initial, so set the font lighter so the
   //  user can differentiate between initial and non-initial
   if (value != 0){
-      NSString *numberToDisplay = [NSString stringWithFormat:@"%d", value];
-      [button setTitle:numberToDisplay forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:IPAD_FONT_SIZE];
-  
+    
   } else {
-      [button setTitle:@"" forState:UIControlStateNormal];
-      button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:IPAD_FONT_SIZE];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:IPAD_FONT_SIZE];
   }
+  
+  [self setValue:value atRow:row andColumn:col];
 }
 
 @end
