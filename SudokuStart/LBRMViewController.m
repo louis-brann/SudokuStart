@@ -19,6 +19,8 @@
   LBSTNumPadView *_numPadView;
   LBSTGridModel *_gridModel;
   LBSTTimerView *_timerView;
+  
+  BOOL _inPlay;
 }
 
 @end
@@ -54,7 +56,9 @@
 
   // Create numPad frame
   CGFloat numPadWidth = gridSize;
-  CGFloat numPadHeight = (gridSize/10.0) * 1.2;
+
+  // Have space for 2 rows of buttons, and 3 strips of padding
+  CGFloat numPadHeight = (gridSize/10.0) * (2 + 0.3);
   CGFloat numPadYOffset = (1.25 * gridYOffset) + CGRectGetHeight(gridFrame);
   CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
   
@@ -117,27 +121,32 @@
 
 - (void)cellWasTapped:(id)sender
 {
-  UIButton *button = (UIButton*)sender;
-  int row = (int)button.tag / 10;
-  int col = (int)button.tag % 10;
-  
-  if ([_gridModel isCellMutableAtRow:row andColumn:col]){
-    // Check the current input for consistency
-    int currentInput = [_numPadView currentNum];
-    BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];
+  if (_inPlay){
     
-    // If it's consistent, set the value
-    if (consistentInput){
-      [_gridModel setValue:currentInput atRow:row andColumn:col];
-      [_gridView setValue:currentInput atRow:row andColumn:col];
+    UIButton *button = (UIButton*)sender;
+    int row = (int)button.tag / 10;
+    int col = (int)button.tag % 10;
+    
+    if ([_gridModel isCellMutableAtRow:row andColumn:col]){
+      // Check the current input for consistency
+      int currentInput = [_numPadView currentNum];
+      BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];
+      
+      // If it's consistent, set the value
+      if (consistentInput){
+        [_gridModel setValue:currentInput atRow:row andColumn:col];
+        [_gridView setValue:currentInput atRow:row andColumn:col];
+      }
     }
   }
 }
 
 - (void)alertWin
 {
+  _inPlay = NO;
+  NSString *message = [NSString stringWithFormat:@"You finished in %@!", [[_timerView timerLabel] text]];
   UIAlertView *winAlert = [[UIAlertView alloc] initWithTitle:@"Congratulations!"
-                                                     message:@"You've won!"
+                                                     message:message
                                                     delegate:self
                                            cancelButtonTitle:@"Yeah!"
                                            otherButtonTitles: nil];
@@ -158,6 +167,7 @@
     }
   }
   
+  _inPlay = YES;
   [_timerView startTimer];
 }
 

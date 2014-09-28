@@ -79,8 +79,8 @@ static CGFloat const IPAD_FONT_SIZE = 40;
         button.titleLabel.adjustsFontSizeToFitWidth = YES;
         
         // Set up highlighted background
-        [button setBackgroundImage: [UIImage imageWithColor: [UIColor yellowColor]]
-                          forState: UIControlStateHighlighted];
+        UIColor *cellHighlightColor = [UIColor colorWithRed:0.486 green:0.816 blue:0.447 alpha:1.0];
+        [button setBackgroundImage: [UIImage imageWithColor:cellHighlightColor] forState:UIControlStateHighlighted];
         
         // Make the tag such that the first digit represents the
         // row, and the second represents the column

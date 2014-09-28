@@ -11,10 +11,9 @@
 @implementation LBSTTimerView {
   NSTimer *_gameClock;
   NSDate *_startDate;
-  UILabel *_timerLabel;
 }
 
-//@synthesize timerLabel = _timerLabel;
+@synthesize timerLabel = _timerLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -69,5 +68,6 @@
   _startDate = [NSDate date];
   _timerLabel.text = @"00:00";
 }
+
 
 @end

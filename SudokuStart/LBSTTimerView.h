@@ -10,7 +10,7 @@
 
 @interface LBSTTimerView : UIView
 
-//@property(nonatomic) UILabel *timerLabel;
+@property(nonatomic) UILabel *timerLabel;
 
 - (void) startTimer;
 - (void) resetTimer;

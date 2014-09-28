@@ -81,7 +81,8 @@
   int randomGridNumber = arc4random_uniform(60000);
   
   NSString *randomGridString = [self getGridString:randomGridNumber];
-  [self parseGridString:randomGridString];
+  NSString *nearWinningBoard = @"9615284374376195825824379618261937547592643183148756291753428966439812752987561..";
+  [self parseGridString:nearWinningBoard];
   
 }
 
@@ -95,8 +96,13 @@
 {
   NSNumber *currentNSValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
   
-  if ([currentNSValue intValue] == 0){
+  // If the current value is zero and the input isn't, that's one less blank cell
+  // If the current value is non-zero and the input is zero, that's one more blank
+  //    cell
+  if ([currentNSValue intValue] == 0 && value != 0){
     --_numBlankCells;
+  } else if ([currentNSValue intValue] != 0 && value == 0){
+    ++_numBlankCells;
   }
   
   [[_currentGrid objectAtIndex:row] setObject:[NSNumber numberWithInt:value] atIndex:col];
@@ -125,6 +131,11 @@
 //   when values are being input, and initial values cannot be overwritten
 -(BOOL) isValueConsistent:(int)value atRow:(int)row andColumn:(int)col
 {
+  // Always able to delete a cell
+  if (value == 0){
+    return YES;
+  }
+  
   // Check the row of the value
   for (int i = 0; i < 9; ++i) {
     NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:i];

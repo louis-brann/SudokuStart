@@ -12,6 +12,8 @@
 @implementation LBSTNumPadView
 {
   NSMutableArray *_numbers;
+  UIButton *_deleteButton;
+  UIButton *_clearGridButton;
 }
 
 static CGFloat const IPAD_FONT_SIZE = 30;
@@ -60,7 +62,7 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       }
       
       // Set up title
-      [button setTitle:[NSString stringWithFormat:@"%d", buttonNum] forState:UIControlStateNormal];
+      [button setTitle:[NSString stringWithFormat:@"%d", button.tag] forState:UIControlStateNormal];
       [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
       button.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -75,7 +77,39 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       
       xOffset += buttonSize + baseOffset;
     }
+    
+    // Set up 2 row buttons
+    CGFloat secondRowYOffset = buttonSize + (2 * baseOffset);
+    CGFloat secondRowButtonWidth = (2 * buttonSize) + baseOffset;
+    
+    // Set up secondRow x offsets
+    CGFloat deleteButtonXOffset = buttonSize + (2 * baseOffset);
+    CGFloat clearGridButtonXOffset = (6 * buttonSize) + (6 * baseOffset);
+    
+    // Set up delete button
+    CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
+    _deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
+    _deleteButton.tag = 0;
+    
+    // Delete button background TODO
+    _deleteButton.backgroundColor = [UIColor redColor];
+    
+    // Set up title
+    [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [_deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    _deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    [self addSubview:_deleteButton];
+    
+    [_deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+    
+    CGRect clearGridButtonFrame = CGRectMake(clearGridButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
+    _clearGridButton = [[UIButton alloc] initWithFrame:clearGridButtonFrame];
+    [self addSubview:_clearGridButton];
   }
+  
+  
   
   return self;
 }
@@ -89,7 +123,12 @@ static CGFloat const IPAD_FONT_SIZE = 30;
   UIImage *numpadSelectedImage = [UIImage imageNamed:@"numpad-highlight.png"];
 
   UIButton *newButton = (UIButton*)sender;
-  UIButton *oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
+  UIButton *oldButton;
+  if ([self currentNum] == 0){
+    oldButton = _deleteButton;
+  } else {
+    oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
+  }
   
   // Change the background colors appropriately
   [oldButton setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
