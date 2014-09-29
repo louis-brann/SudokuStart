@@ -12,8 +12,6 @@
 @implementation LBSTNumPadView
 {
   NSMutableArray *_numbers;
-  UIButton *_deleteButton;
-  UIButton *_clearGridButton;
 }
 
 static CGFloat const IPAD_FONT_SIZE = 30;
@@ -46,21 +44,22 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     
     // Set up delete button
     CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset, deleteButtonYOffset, deleteButtonWidth, deleteButtonHeight);
-    _deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
-    _deleteButton.tag = 0;
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
+    deleteButton.tag = 0;
     
     // Delete button background TODO
-    _deleteButton.backgroundColor = [UIColor redColor];
+    deleteButton.backgroundColor = [UIColor redColor];
     
     // Set up delete button title
-    [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [_deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
-    _deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
-    [self addSubview:_deleteButton];
+    [self addSubview:deleteButton];
     
-    [_deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+    [deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+    [_numbers addObject:deleteButton];
     
     UIButton *button;
     
@@ -97,7 +96,7 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       [button addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
       
       // Add the button to the array
-      [_numbers insertObject:button atIndex:i];
+      [_numbers insertObject:button atIndex:buttonNum];
       
       xOffset += buttonSize + baseOffset;
     }
@@ -133,12 +132,7 @@ static CGFloat const IPAD_FONT_SIZE = 30;
   UIImage *numpadSelectedImage = [UIImage imageNamed:@"numpad-highlight.png"];
 
   UIButton *newButton = (UIButton*)sender;
-  UIButton *oldButton;
-  if ([self currentNum] == 0){
-    oldButton = _deleteButton;
-  } else {
-    oldButton = [_numbers objectAtIndex:([self currentNum] - 1)];
-  }
+  UIButton *oldButton = [_numbers objectAtIndex:[self currentNum]];
   
   // Change the background colors appropriately
   [oldButton setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
