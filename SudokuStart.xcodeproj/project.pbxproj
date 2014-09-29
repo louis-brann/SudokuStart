@@ -40,6 +40,20 @@
 		DA07252319C247B6001F4BC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250519C247B6001F4BC2 /* UIKit.framework */; };
 		DA07252B19C247B6001F4BC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA07252919C247B6001F4BC2 /* InfoPlist.strings */; };
 		DA07252D19C247B6001F4BC2 /* SudokuStartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */; };
+		DA29AF1819DA1FDE0029801A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0819DA1FDE0029801A /* .gitignore */; };
+		DA29AF1919DA1FDE0029801A /* cleancov in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0919DA1FDE0029801A /* cleancov */; };
+		DA29AF1A19DA1FDE0029801A /* env.sh in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0A19DA1FDE0029801A /* env.sh */; };
+		DA29AF1B19DA1FDE0029801A /* envcov.sh in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0B19DA1FDE0029801A /* envcov.sh */; };
+		DA29AF1C19DA1FDE0029801A /* exportenv.sh in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0C19DA1FDE0029801A /* exportenv.sh */; };
+		DA29AF1D19DA1FDE0029801A /* getcov in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF0D19DA1FDE0029801A /* getcov */; };
+		DA29AF1E19DA1FDE0029801A /* genhtml in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1019DA1FDE0029801A /* genhtml */; };
+		DA29AF1F19DA1FDE0029801A /* geninfo in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1119DA1FDE0029801A /* geninfo */; };
+		DA29AF2019DA1FDE0029801A /* lcov in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1219DA1FDE0029801A /* lcov */; };
+		DA29AF2119DA1FDE0029801A /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1319DA1FDE0029801A /* COPYING */; };
+		DA29AF2219DA1FDE0029801A /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1419DA1FDE0029801A /* LICENSE.txt */; };
+		DA29AF2319DA1FDE0029801A /* llvm-cov-wrapper.sh in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1519DA1FDE0029801A /* llvm-cov-wrapper.sh */; };
+		DA29AF2419DA1FDE0029801A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1619DA1FDE0029801A /* README.md */; };
+		DA29AF2519DA1FDE0029801A /* run_code_coverage_post.sh in Resources */ = {isa = PBXBuildFile; fileRef = DA29AF1719DA1FDE0029801A /* run_code_coverage_post.sh */; };
 		DAB82DD119CCCEA800A03907 /* LBSTGridModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */; };
 		DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CC719C946230008ECFD /* UIImage+LBSTColorImage.m */; };
 		DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */; };
@@ -82,6 +96,20 @@
 		DA07252819C247B6001F4BC2 /* SudokuStartTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SudokuStartTests-Info.plist"; sourceTree = "<group>"; };
 		DA07252A19C247B6001F4BC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA07252C19C247B6001F4BC2 /* SudokuStartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SudokuStartTests.m; sourceTree = "<group>"; };
+		DA29AF0819DA1FDE0029801A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		DA29AF0919DA1FDE0029801A /* cleancov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = cleancov; sourceTree = "<group>"; };
+		DA29AF0A19DA1FDE0029801A /* env.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = env.sh; sourceTree = "<group>"; };
+		DA29AF0B19DA1FDE0029801A /* envcov.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = envcov.sh; sourceTree = "<group>"; };
+		DA29AF0C19DA1FDE0029801A /* exportenv.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = exportenv.sh; sourceTree = "<group>"; };
+		DA29AF0D19DA1FDE0029801A /* getcov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = getcov; sourceTree = "<group>"; };
+		DA29AF1019DA1FDE0029801A /* genhtml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = genhtml; sourceTree = "<group>"; };
+		DA29AF1119DA1FDE0029801A /* geninfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = geninfo; sourceTree = "<group>"; };
+		DA29AF1219DA1FDE0029801A /* lcov */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.perl; path = lcov; sourceTree = "<group>"; };
+		DA29AF1319DA1FDE0029801A /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		DA29AF1419DA1FDE0029801A /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		DA29AF1519DA1FDE0029801A /* llvm-cov-wrapper.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "llvm-cov-wrapper.sh"; sourceTree = "<group>"; };
+		DA29AF1619DA1FDE0029801A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		DA29AF1719DA1FDE0029801A /* run_code_coverage_post.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_code_coverage_post.sh; sourceTree = "<group>"; };
 		DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTGridModel.h; sourceTree = "<group>"; };
 		DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTGridModel.m; sourceTree = "<group>"; };
 		DABC6CC619C946230008ECFD /* UIImage+LBSTColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LBSTColorImage.h"; sourceTree = "<group>"; };
@@ -125,6 +153,7 @@
 		DA0724F519C247B6001F4BC2 = {
 			isa = PBXGroup;
 			children = (
+				DA29AF0719DA1FDE0029801A /* XcodeCoverage */,
 				DA07250719C247B6001F4BC2 /* SudokuStart */,
 				DA07252619C247B6001F4BC2 /* SudokuStartTests */,
 				DA07250019C247B6001F4BC2 /* Frameworks */,
@@ -207,6 +236,43 @@
 				DA07252919C247B6001F4BC2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DA29AF0719DA1FDE0029801A /* XcodeCoverage */ = {
+			isa = PBXGroup;
+			children = (
+				DA29AF0819DA1FDE0029801A /* .gitignore */,
+				DA29AF0919DA1FDE0029801A /* cleancov */,
+				DA29AF0A19DA1FDE0029801A /* env.sh */,
+				DA29AF0B19DA1FDE0029801A /* envcov.sh */,
+				DA29AF0C19DA1FDE0029801A /* exportenv.sh */,
+				DA29AF0D19DA1FDE0029801A /* getcov */,
+				DA29AF0E19DA1FDE0029801A /* lcov-1.10 */,
+				DA29AF1419DA1FDE0029801A /* LICENSE.txt */,
+				DA29AF1519DA1FDE0029801A /* llvm-cov-wrapper.sh */,
+				DA29AF1619DA1FDE0029801A /* README.md */,
+				DA29AF1719DA1FDE0029801A /* run_code_coverage_post.sh */,
+			);
+			path = XcodeCoverage;
+			sourceTree = "<group>";
+		};
+		DA29AF0E19DA1FDE0029801A /* lcov-1.10 */ = {
+			isa = PBXGroup;
+			children = (
+				DA29AF0F19DA1FDE0029801A /* bin */,
+				DA29AF1319DA1FDE0029801A /* COPYING */,
+			);
+			path = "lcov-1.10";
+			sourceTree = "<group>";
+		};
+		DA29AF0F19DA1FDE0029801A /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				DA29AF1019DA1FDE0029801A /* genhtml */,
+				DA29AF1119DA1FDE0029801A /* geninfo */,
+				DA29AF1219DA1FDE0029801A /* lcov */,
+			);
+			path = bin;
 			sourceTree = "<group>";
 		};
 		DABC6CC919C949EB0008ECFD /* iPad */ = {
@@ -298,12 +364,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA29AF2219DA1FDE0029801A /* LICENSE.txt in Resources */,
+				DA29AF2519DA1FDE0029801A /* run_code_coverage_post.sh in Resources */,
+				DA29AF2119DA1FDE0029801A /* COPYING in Resources */,
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
+				DA29AF1B19DA1FDE0029801A /* envcov.sh in Resources */,
+				DA29AF1819DA1FDE0029801A /* .gitignore in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
+				DA29AF1919DA1FDE0029801A /* cleancov in Resources */,
+				DA29AF2019DA1FDE0029801A /* lcov in Resources */,
+				DA29AF2319DA1FDE0029801A /* llvm-cov-wrapper.sh in Resources */,
+				DA29AF1C19DA1FDE0029801A /* exportenv.sh in Resources */,
+				DA29AF1D19DA1FDE0029801A /* getcov in Resources */,
+				DA29AF1F19DA1FDE0029801A /* geninfo in Resources */,
 				2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */,
+				DA29AF2419DA1FDE0029801A /* README.md in Resources */,
 				26E82F8619D7343B005C990B /* click.mp3 in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
 				2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */,
+				DA29AF1A19DA1FDE0029801A /* env.sh in Resources */,
+				DA29AF1E19DA1FDE0029801A /* genhtml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
