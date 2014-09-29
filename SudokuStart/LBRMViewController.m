@@ -57,9 +57,10 @@
   // Create numPad frame
   CGFloat numPadWidth = gridSize;
 
-  // Have space for 2 rows of buttons, and 3 strips of padding
-  CGFloat numPadHeight = (gridSize/10.0) * (2 + 0.3);
-  CGFloat numPadYOffset = (1.25 * gridYOffset) + CGRectGetHeight(gridFrame);
+  // Have space for 1 row of buttons, and a delete button 75% of the height of a
+  //   normal button, and 3 strips of padding
+  CGFloat numPadHeight = (gridSize/10.0) * (1.75 + 0.3);
+  CGFloat numPadYOffset = (1.15 * gridYOffset) + CGRectGetHeight(gridFrame);
   CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
   
   // Create numPad view
@@ -100,14 +101,21 @@
   [newGameButton addTarget:self action:@selector(startNewGame)forControlEvents:UIControlEventTouchUpInside];
   
   // Set up timer
-  CGFloat timerWidth = newGameButtonWidth;
-  CGFloat timerHeight = newGameButtonHeight;
-  CGFloat timerXOffset = frameWidth - (newGameButtonXOffset + newGameButtonWidth);
-  CGFloat timerYOffset = newGameButtonYOffset;
+//  CGFloat timerWidth = newGameButtonWidth;
+//  CGFloat timerHeight = newGameButtonHeight;
+//  CGFloat timerXOffset = frameWidth - (newGameButtonXOffset + newGameButtonWidth);
+//  CGFloat timerYOffset = newGameButtonYOffset;
+  CGFloat buttonSize = gridSize / 10.0;
+  CGFloat baseOffset = buttonSize / (10.0 + 4.0);
+  CGFloat timerWidth = (3 * buttonSize) + (2 * (baseOffset));
+  CGFloat timerHeight = 0.04 * frameHeight;
+  CGFloat timerXOffset = gridXOffset + (3 * buttonSize) + (6 * baseOffset);
+  CGFloat timerYOffset = 0.05 * frameHeight;
   CGRect  timerFrame = CGRectMake(timerXOffset, timerYOffset, timerWidth, timerHeight);
   
   _timerView = [[LBSTTimerView alloc] initWithFrame:timerFrame];
   UIColor *timerBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebg-normal.png"]];
+  // UIColor *timerBackgroundColor = [UIColor blackColor];
   [_timerView setBackgroundColor:timerBackgroundColor];
   [self.view addSubview:_timerView];
   
@@ -144,22 +152,13 @@
 
 - (void)clearCellValues
 {
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-                                                  message:@"Are you sure you want to clear the grid?"
-                                                 delegate:self
-                                        cancelButtonTitle:@"NO!"
-                                        otherButtonTitles:@"Yes", nil];
-  [alert show];
-
-  
-  // Clear the value from every mutable cell in the grid
-  for (int row = 0; row < 9; row++) {
-    for (int col = 0; col < 9; col++) {
-      if ([_gridModel isCellMutableAtRow:row andColumn:col]) {
-        [_gridModel setValue:0 atRow:row andColumn:col];
-        [_gridView setValue:0 atRow:row andColumn:col];
-      }
-    }
+  if (_inPlay){
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+                                                    message:@"Are you sure you want to clear the grid?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"NO!"
+                                          otherButtonTitles:@"Yes", nil];
+    [alert show];
   }
 }
 
@@ -205,14 +204,18 @@
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  // the user clicked one of the OK/Cancel buttons
-  if (buttonIndex == 0)
-  {
-    NSLog(@"ok");
-  }
-  else
-  {
-    NSLog(@"cancel");
+  
+  // If the user clicked the second button (OK on ClearGrid, doesn't exist on
+  //    win alert), clear the value from every mutable cell in the grid
+  if (buttonIndex == 1) {
+    for (int row = 0; row < 9; row++) {
+      for (int col = 0; col < 9; col++) {
+        if ([_gridModel isCellMutableAtRow:row andColumn:col]) {
+          [_gridModel setValue:0 atRow:row andColumn:col];
+          [_gridView setValue:0 atRow:row andColumn:col];
+        }
+      }
+    }
   }
 }
 

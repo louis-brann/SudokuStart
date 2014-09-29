@@ -38,6 +38,30 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     CGFloat baseOffset = buttonSize / 10.0;
     CGFloat xOffset = baseOffset;
     
+    // Set up delete button
+    CGFloat deleteButtonWidth = (9 * buttonSize) + (8 * baseOffset);
+    CGFloat deleteButtonHeight = 0.75 * buttonSize;
+    CGFloat deleteButtonXOffset = baseOffset;
+    CGFloat deleteButtonYOffset = buttonSize + (2 * baseOffset);
+    
+    // Set up delete button
+    CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset, deleteButtonYOffset, deleteButtonWidth, deleteButtonHeight);
+    _deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
+    _deleteButton.tag = 0;
+    
+    // Delete button background TODO
+    _deleteButton.backgroundColor = [UIColor redColor];
+    
+    // Set up delete button title
+    [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+    [_deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    _deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    [self addSubview:_deleteButton];
+    
+    [_deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+    
     UIButton *button;
     
     // Initialize number buttons
@@ -78,47 +102,23 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       xOffset += buttonSize + baseOffset;
     }
     
-    // Set up 2 row buttons
-    CGFloat secondRowYOffset = buttonSize + (2 * baseOffset);
-    CGFloat secondRowButtonWidth = (2 * buttonSize) + baseOffset;
     
-    // Set up secondRow x offsets
-    CGFloat deleteButtonXOffset = buttonSize + (2 * baseOffset);
-    CGFloat clearGridButtonXOffset = (6 * buttonSize) + (6 * baseOffset);
     
-    // Set up delete button
-    CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
-    _deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
-    _deleteButton.tag = 0;
-    
-    // Delete button background TODO
-    _deleteButton.backgroundColor = [UIColor redColor];
-    
-    // Set up delete button title
-    [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [_deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
-    _deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    
-    [self addSubview:_deleteButton];
-    
-    [_deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
-    
-    CGRect clearGridButtonFrame = CGRectMake(clearGridButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
-    _clearGridButton = [[UIButton alloc] initWithFrame:clearGridButtonFrame];
-    
-    // Clear grid button background TODO
-    _clearGridButton.backgroundColor = [UIColor redColor];
-    
-    // Set up clear grid button title
-    [_clearGridButton setTitle:@"Clear Grid" forState:UIControlStateNormal];
-    [_clearGridButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _clearGridButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
-    _clearGridButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    
-    [self addSubview:_clearGridButton];
-    
-    [_clearGridButton addTarget:self action:@selector(clearWasPressed) forControlEvents:UIControlEventTouchUpInside];
+//    CGRect clearGridButtonFrame = CGRectMake(clearGridButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
+//    _clearGridButton = [[UIButton alloc] initWithFrame:clearGridButtonFrame];
+//    
+//    // Clear grid button background TODO
+//    _clearGridButton.backgroundColor = [UIColor redColor];
+//    
+//    // Set up clear grid button title
+//    [_clearGridButton setTitle:@"Clear Grid" forState:UIControlStateNormal];
+//    [_clearGridButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    _clearGridButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+//    _clearGridButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+//    
+//    [self addSubview:_clearGridButton];
+//    
+//    [_clearGridButton addTarget:self action:@selector(clearWasPressed) forControlEvents:UIControlEventTouchUpInside];
   }
 
   return self;
