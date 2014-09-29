@@ -105,6 +105,25 @@
   [testModel setValue:lastValue atRow:8 andColumn:8];
   
   XCTAssertTrue([testModel isWinning], @"Confirm that a winning board is found to be correct");
+  
+  // Ensure that inconsistencies are found for row, col, and subgrid
+  [testModel clearGrid];
+  nearWinningBoard = @".61529437437619582582437961826193754759264318314875629175342896643981275298756143";
+  [testModel parseGridString:nearWinningBoard];
+  lastValue = 9;
+  [testModel setValue:lastValue atRow:0 andColumn:0];
+  
+  [testModel clearGrid];
+  nearWinningBoard = @".61528437437619582582437961926193754759264318314875629175342896643981275298756143";
+  [testModel parseGridString:nearWinningBoard];
+  lastValue = 9;
+  [testModel setValue:lastValue atRow:0 andColumn:0];
+  
+  [testModel clearGrid];
+  nearWinningBoard = @".61528437437619582592437961826193754759264318314875629175342896643981275298756143";
+  [testModel parseGridString:nearWinningBoard];
+  lastValue = 9;
+  [testModel setValue:lastValue atRow:0 andColumn:0];
 }
 
 @end

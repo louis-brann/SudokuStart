@@ -22,11 +22,10 @@
 -(void) setValue:(int)value atRow:(int)row andColumn:(int)col;
 -(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col;
 -(BOOL) isValueConsistent:(int)input atRow:(int)row andColumn:(int)col;
--(BOOL) isCurrentGridConsistentWithValue:(int)value atRow:(int)row andColumn:(int)col;
--(BOOL) isWinning;
 -(void) clearGrid;
 
 // public for testing
-- (void) parseGridString:(NSString *)gridString;
+-(void) parseGridString:(NSString *)gridString;
+-(BOOL) isWinning;
 
 @end

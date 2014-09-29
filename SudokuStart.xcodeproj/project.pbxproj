@@ -226,6 +226,7 @@
 				DA0724FA19C247B6001F4BC2 /* Sources */,
 				DA0724FB19C247B6001F4BC2 /* Frameworks */,
 				DA0724FC19C247B6001F4BC2 /* Resources */,
+				263B19B819D8BDC500032FA2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -317,6 +318,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		263B19B819D8BDC500032FA2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XCodeCoverage/exportenv.sh;
+		};
 		268C3FC319CE519F00CD3BAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -483,6 +497,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";

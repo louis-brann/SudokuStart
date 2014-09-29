@@ -31,6 +31,10 @@
 {
   [super viewDidLoad];
   
+  // Initialize GridModel and initialize grid
+  _gridModel = [[LBSTGridModel alloc] init];
+  _gridModel.delegate = self;
+  
   // Get frame and frame dimensions
   CGRect frame = self.view.frame;
   CGFloat frameWidth = CGRectGetWidth(frame);
@@ -49,10 +53,6 @@
   _gridView.delegate = self;
   _gridView.backgroundColor = [UIColor blackColor];
   [self.view addSubview:_gridView];
-  
-  // Initialize GridModel and initialize grid
-  _gridModel = [[LBSTGridModel alloc] init];
-  _gridModel.delegate = self;
 
   // Create numPad frame
   CGFloat numPadWidth = gridSize;
@@ -65,6 +65,7 @@
   // Create numPad view
   _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
   _numPadView.backgroundColor = [UIColor blackColor];
+  _numPadView.delegate = self;
   [self.view addSubview:_numPadView];
 
   // New game button frame
@@ -141,6 +142,27 @@
   }
 }
 
+- (void)clearCellValues
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
+                                                  message:@"Are you sure you want to clear the grid?"
+                                                 delegate:self
+                                        cancelButtonTitle:@"NO!"
+                                        otherButtonTitles:@"Yes", nil];
+  [alert show];
+
+  
+  // Clear the value from every mutable cell in the grid
+  for (int row = 0; row < 9; row++) {
+    for (int col = 0; col < 9; col++) {
+      if ([_gridModel isCellMutableAtRow:row andColumn:col]) {
+        [_gridModel setValue:0 atRow:row andColumn:col];
+        [_gridView setValue:0 atRow:row andColumn:col];
+      }
+    }
+  }
+}
+
 - (void)alertWin
 {
   _inPlay = NO;
@@ -155,6 +177,17 @@
 
 -(void)startNewGame
 {
+  // Set up button click audio
+  NSError *error;
+  NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"click" ofType:@"mp3"];
+  NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+  AVAudioPlayer *numpadPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+  [numpadPlayer prepareToPlay];
+  self.audioPlayer = numpadPlayer;
+  
+  // Play a sound effect!
+  [self.audioPlayer play];
+  
   [_gridModel clearGrid];
   [_gridModel initializeGrid];
   
@@ -169,6 +202,18 @@
   
   _inPlay = YES;
   [_timerView startTimer];
+}
+
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+  // the user clicked one of the OK/Cancel buttons
+  if (buttonIndex == 0)
+  {
+    NSLog(@"ok");
+  }
+  else
+  {
+    NSLog(@"cancel");
+  }
 }
 
 @end

@@ -62,7 +62,7 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       }
       
       // Set up title
-      [button setTitle:[NSString stringWithFormat:@"%d", button.tag] forState:UIControlStateNormal];
+      [button setTitle:[NSString stringWithFormat:@"%ld", (long)button.tag] forState:UIControlStateNormal];
       [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
       button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
       button.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -94,7 +94,7 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     // Delete button background TODO
     _deleteButton.backgroundColor = [UIColor redColor];
     
-    // Set up title
+    // Set up delete button title
     [_deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
     [_deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
@@ -106,11 +106,21 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     
     CGRect clearGridButtonFrame = CGRectMake(clearGridButtonXOffset, secondRowYOffset, secondRowButtonWidth, buttonSize);
     _clearGridButton = [[UIButton alloc] initWithFrame:clearGridButtonFrame];
+    
+    // Clear grid button background TODO
+    _clearGridButton.backgroundColor = [UIColor redColor];
+    
+    // Set up clear grid button title
+    [_clearGridButton setTitle:@"Clear Grid" forState:UIControlStateNormal];
+    [_clearGridButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _clearGridButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    _clearGridButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
     [self addSubview:_clearGridButton];
+    
+    [_clearGridButton addTarget:self action:@selector(clearWasPressed) forControlEvents:UIControlEventTouchUpInside];
   }
-  
-  
-  
+
   return self;
 }
 
@@ -136,6 +146,12 @@ static CGFloat const IPAD_FONT_SIZE = 30;
 
   // Update which button is currently selected
   [self setCurrentNum:(int)newButton.tag];
+}
+
+- (void)clearWasPressed
+{
+  // Delegate to ViewController
+  [self.delegate clearCellValues];
 }
 
 @end

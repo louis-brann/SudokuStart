@@ -81,8 +81,7 @@
   int randomGridNumber = arc4random_uniform(60000);
   
   NSString *randomGridString = [self getGridString:randomGridNumber];
-  NSString *nearWinningBoard = @"9615284374376195825824379618261937547592643183148756291753428966439812752987561..";
-  [self parseGridString:nearWinningBoard];
+  [self parseGridString:randomGridString];
   
 }
 
@@ -228,6 +227,10 @@
 
 -(void)clearGrid
 {
+  for (int row = 0; row < 9; ++row) {
+    [[_initialGrid objectAtIndex:row] removeAllObjects];
+  }
+  
   [_initialGrid removeAllObjects];
   [_currentGrid removeAllObjects];
 }

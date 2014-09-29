@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LBRMGridView.h"
 #import "LBSTGridModel.h"
+#import "LBSTNumPadView.h"
 
-@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, UIAlertViewDelegate>
+@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, ClearCellValues, UIAlertViewDelegate>
+
+@property (nonatomic) AVAudioPlayer *audioPlayer;
 
 @end

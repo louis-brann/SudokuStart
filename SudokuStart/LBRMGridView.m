@@ -11,7 +11,7 @@
 #import "UIImage+LBSTColorImage.h"
 
 @implementation LBRMGridView {
-    NSMutableArray *_buttons;
+    NSMutableArray *_cells;
 }
 
 static CGFloat const IPAD_FONT_SIZE = 40;
@@ -22,9 +22,9 @@ static CGFloat const IPAD_FONT_SIZE = 40;
   
   if (self) {
     // Initialize array of buttons for 9x9 sudoku
-    _buttons = [[NSMutableArray alloc] initWithCapacity:9];
+    _cells = [[NSMutableArray alloc] initWithCapacity:9];
     for (int i = 0; i < 9; ++i) {
-      [_buttons addObject:[[NSMutableArray alloc] initWithCapacity:9]];
+      [_cells addObject:[[NSMutableArray alloc] initWithCapacity:9]];
     }
 
     // Setup button size and offset
@@ -86,7 +86,7 @@ static CGFloat const IPAD_FONT_SIZE = 40;
         // row, and the second represents the column
         button.tag = row*10+col;
         
-        [[_buttons objectAtIndex:row] insertObject:button atIndex:col];
+        [[_cells objectAtIndex:row] insertObject:button atIndex:col];
         
         // Update column offset
         xOffset += buttonSize+baseOffset;
@@ -108,7 +108,7 @@ static CGFloat const IPAD_FONT_SIZE = 40;
 
 -(void)setValue:(int)value atRow:(int)row andColumn:(int)col
 {
-  UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
+  UIButton *button = [[_cells objectAtIndex:row] objectAtIndex:col];
   
   // If the value is not 0, convert it into a string for the button title
   // Otherwise, it is blank
@@ -123,7 +123,7 @@ static CGFloat const IPAD_FONT_SIZE = 40;
 
 -(void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col
 {
-  UIButton *button = [[_buttons objectAtIndex:row] objectAtIndex:col];
+  UIButton *button = [[_cells objectAtIndex:row] objectAtIndex:col];
   
   // If the value is not 0, it is an initial value, so make it bold
   // Otherwise, it is not initial, so set the font lighter so the
