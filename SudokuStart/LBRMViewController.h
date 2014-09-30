@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "LBRMGridView.h"
 #import "LBSTGridModel.h"
+#import "LBSTNumPadView.h"
+#import "LBSTGameButtonView.h"
+#import "LBSTTimerView.h"
 
-@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, UIAlertViewDelegate>
+@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, StartNewGame, RestartGame, UIAlertViewDelegate>
+
+// SFX sounds acquired from FreeSound
+// BGM acquired from Waterflame
+@property (strong, nonatomic) AVAudioPlayer *SFXPlayer;
+@property (strong, nonatomic) AVAudioPlayer *BGMPlayer;
 
 @end

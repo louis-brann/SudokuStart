@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "UIImage+LBSTColorImage.h"
 
 @interface LBSTNumPadView : UIView
 
-@property (nonatomic) int currentNum;
+@property (assign, nonatomic) int currentNum;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end

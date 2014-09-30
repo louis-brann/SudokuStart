@@ -23,6 +23,14 @@
 /* Begin PBXBuildFile section */
 		2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B219D4B0E000EED6C9 /* grid1.txt */; };
 		2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B319D4B0E000EED6C9 /* grid2.txt */; };
+		26D817F919DA247C00166A09 /* LBSTGameButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D817F819DA247C00166A09 /* LBSTGameButtonView.m */; };
+		26D817FB19DA344200166A09 /* scribble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FA19DA344200166A09 /* scribble.mp3 */; };
+		26D817FD19DA358B00166A09 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FC19DA358B00166A09 /* boom.mp3 */; };
+		26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FE19DA3E6F00166A09 /* yay.mp3 */; };
+		26D8180119DA691600166A09 /* jumper.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D8180019DA691600166A09 /* jumper.mp3 */; };
+		26D8180319DA6D1000166A09 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D8180219DA6D1000166A09 /* win.mp3 */; };
+		26E82F8619D7343B005C990B /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26E82F8519D7343B005C990B /* click.mp3 */; };
+		26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E82F8819D737F5005C990B /* LBSTTimerView.m */; };
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
 		DA07250219C247B6001F4BC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250119C247B6001F4BC2 /* Foundation.framework */; };
 		DA07250419C247B6001F4BC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA07250319C247B6001F4BC2 /* CoreGraphics.framework */; };
@@ -56,6 +64,16 @@
 /* Begin PBXFileReference section */
 		2656A3B219D4B0E000EED6C9 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
 		2656A3B319D4B0E000EED6C9 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
+		26D817F719DA247C00166A09 /* LBSTGameButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTGameButtonView.h; sourceTree = "<group>"; };
+		26D817F819DA247C00166A09 /* LBSTGameButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTGameButtonView.m; sourceTree = "<group>"; };
+		26D817FA19DA344200166A09 /* scribble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scribble.mp3; sourceTree = "<group>"; };
+		26D817FC19DA358B00166A09 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		26D817FE19DA3E6F00166A09 /* yay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yay.mp3; sourceTree = "<group>"; };
+		26D8180019DA691600166A09 /* jumper.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jumper.mp3; sourceTree = "<group>"; };
+		26D8180219DA6D1000166A09 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		26E82F8519D7343B005C990B /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
+		26E82F8719D737F5005C990B /* LBSTTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTTimerView.h; sourceTree = "<group>"; };
+		26E82F8819D737F5005C990B /* LBSTTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTTimerView.m; sourceTree = "<group>"; };
 		D8AB4FA219C377550004EAD0 /* LBRMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRMGridView.h; sourceTree = "<group>"; };
 		D8AB4FA319C377550004EAD0 /* LBRMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRMGridView.m; sourceTree = "<group>"; };
 		DA0724FE19C247B6001F4BC2 /* SudokuStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SudokuStart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +127,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26E82F8419D7342B005C990B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				26D8180219DA6D1000166A09 /* win.mp3 */,
+				26D8180019DA691600166A09 /* jumper.mp3 */,
+				26D817FE19DA3E6F00166A09 /* yay.mp3 */,
+				26D817FC19DA358B00166A09 /* boom.mp3 */,
+				26D817FA19DA344200166A09 /* scribble.mp3 */,
+				26E82F8519D7343B005C990B /* click.mp3 */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
 		DA0724F519C247B6001F4BC2 = {
 			isa = PBXGroup;
 			children = (
@@ -150,10 +181,14 @@
 				DA07251319C247B6001F4BC2 /* Main.storyboard */,
 				DA07251619C247B6001F4BC2 /* LBRMViewController.h */,
 				DA07251719C247B6001F4BC2 /* LBRMViewController.m */,
+				26E82F8719D737F5005C990B /* LBSTTimerView.h */,
+				26E82F8819D737F5005C990B /* LBSTTimerView.m */,
 				D8AB4FA219C377550004EAD0 /* LBRMGridView.h */,
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
 				DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */,
 				DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */,
+				26D817F719DA247C00166A09 /* LBSTGameButtonView.h */,
+				26D817F819DA247C00166A09 /* LBSTGameButtonView.m */,
 				DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */,
 				DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */,
 				2656A3B219D4B0E000EED6C9 /* grid1.txt */,
@@ -167,6 +202,7 @@
 		DA07250819C247B6001F4BC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				26E82F8419D7342B005C990B /* Audio */,
 				DA07250919C247B6001F4BC2 /* SudokuStart-Info.plist */,
 				DA07250A19C247B6001F4BC2 /* InfoPlist.strings */,
 				DA07250D19C247B6001F4BC2 /* main.m */,
@@ -210,6 +246,7 @@
 				DA0724FA19C247B6001F4BC2 /* Sources */,
 				DA0724FB19C247B6001F4BC2 /* Frameworks */,
 				DA0724FC19C247B6001F4BC2 /* Resources */,
+				263B19B819D8BDC500032FA2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -281,11 +318,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */,
+				26D8180319DA6D1000166A09 /* win.mp3 in Resources */,
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
+				26D817FB19DA344200166A09 /* scribble.mp3 in Resources */,
+				26D817FD19DA358B00166A09 /* boom.mp3 in Resources */,
 				2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */,
+				26E82F8619D7343B005C990B /* click.mp3 in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
 				2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */,
+				26D8180119DA691600166A09 /* jumper.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +343,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		263B19B819D8BDC500032FA2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = XCodeCoverage/exportenv.sh;
+		};
 		268C3FC319CE519F00CD3BAC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,7 +379,9 @@
 				DABC6CCC19CB827D0008ECFD /* LBSTNumPadView.m in Sources */,
 				DAB82DD119CCCEA800A03907 /* LBSTGridModel.m in Sources */,
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
+				26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
+				26D817F919DA247C00166A09 /* LBSTGameButtonView.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
 				DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */,
 				DA07251219C247B6001F4BC2 /* LBRMAppDelegate.m in Sources */,
@@ -410,6 +468,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -465,6 +525,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SudokuStart/SudokuStart-Prefix.pch";
 				INFOPLIST_FILE = "SudokuStart/SudokuStart-Info.plist";
