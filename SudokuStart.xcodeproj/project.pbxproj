@@ -27,6 +27,8 @@
 		26D817FB19DA344200166A09 /* scribble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FA19DA344200166A09 /* scribble.mp3 */; };
 		26D817FD19DA358B00166A09 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FC19DA358B00166A09 /* boom.mp3 */; };
 		26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FE19DA3E6F00166A09 /* yay.mp3 */; };
+		26D8180119DA691600166A09 /* jumper.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D8180019DA691600166A09 /* jumper.mp3 */; };
+		26D8180319DA6D1000166A09 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D8180219DA6D1000166A09 /* win.mp3 */; };
 		26E82F8619D7343B005C990B /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26E82F8519D7343B005C990B /* click.mp3 */; };
 		26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E82F8819D737F5005C990B /* LBSTTimerView.m */; };
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
@@ -67,6 +69,8 @@
 		26D817FA19DA344200166A09 /* scribble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scribble.mp3; sourceTree = "<group>"; };
 		26D817FC19DA358B00166A09 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
 		26D817FE19DA3E6F00166A09 /* yay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yay.mp3; sourceTree = "<group>"; };
+		26D8180019DA691600166A09 /* jumper.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jumper.mp3; sourceTree = "<group>"; };
+		26D8180219DA6D1000166A09 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		26E82F8519D7343B005C990B /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		26E82F8719D737F5005C990B /* LBSTTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTTimerView.h; sourceTree = "<group>"; };
 		26E82F8819D737F5005C990B /* LBSTTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTTimerView.m; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		26E82F8419D7342B005C990B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				26D8180219DA6D1000166A09 /* win.mp3 */,
+				26D8180019DA691600166A09 /* jumper.mp3 */,
 				26D817FE19DA3E6F00166A09 /* yay.mp3 */,
 				26D817FC19DA358B00166A09 /* boom.mp3 */,
 				26D817FA19DA344200166A09 /* scribble.mp3 */,
@@ -313,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */,
+				26D8180319DA6D1000166A09 /* win.mp3 in Resources */,
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
 				26D817FB19DA344200166A09 /* scribble.mp3 in Resources */,
@@ -321,6 +328,7 @@
 				26E82F8619D7343B005C990B /* click.mp3 in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
 				2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */,
+				26D8180119DA691600166A09 /* jumper.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

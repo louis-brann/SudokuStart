@@ -17,6 +17,9 @@
 
 @interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, StartNewGame, RestartGame, UIAlertViewDelegate>
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+// SFX sounds acquired from FreeSound
+// BGM acquired from Waterflame
+@property (strong, nonatomic) AVAudioPlayer *SFXPlayer;
+@property (strong, nonatomic) AVAudioPlayer *BGMPlayer;
 
 @end

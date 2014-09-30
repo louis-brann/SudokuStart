@@ -100,8 +100,8 @@
 - (void)startNewGamePressed
 {
   // Play a sound effect!
-  self.audioPlayer = newGamePlayer;
-  [self.audioPlayer play];
+  self.SFXPlayer = newGamePlayer;
+  [self.SFXPlayer play];
   
   // Delegate to ViewController
   [self.delegate startNewGame];
@@ -110,7 +110,7 @@
 - (void)restartGamePressed
 {
   // Delegate to ViewController
-  self.audioPlayer = newGamePlayer;
+  self.SFXPlayer = newGamePlayer;
   [self.delegate restartGame];
 }
 
@@ -137,8 +137,8 @@
                                    objectAtIndex:randomPhraseNum];
   
   // Play a sound effect!
-  self.audioPlayer = cheerPlayer;
-  [self.audioPlayer play];
+  self.SFXPlayer = cheerPlayer;
+  [self.SFXPlayer play];
   
   UIAlertView *cheerleaderAlert =
     [[UIAlertView alloc] initWithTitle:@"GO GO GO GO!"

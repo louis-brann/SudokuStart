@@ -21,6 +21,6 @@
 
 @property (assign, nonatomic) id <StartNewGame, RestartGame> delegate;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) AVAudioPlayer *SFXPlayer;
 
 @end

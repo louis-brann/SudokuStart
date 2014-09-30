@@ -17,6 +17,9 @@
   LBSTTimerView *_timerView;
   
   BOOL _inPlay;
+  
+  AVAudioPlayer *_setValuePlayer;
+  AVAudioPlayer *_winPlayer;
 }
 
 @end
@@ -27,16 +30,38 @@
 {
   [super viewDidLoad];
   
-  // Set up button click audio
   NSError *error;
+
+  // Set up background game audio
+  NSString *bgMusicPath =[[NSBundle mainBundle] pathForResource:@"jumper"
+                                                         ofType:@"mp3"];
+  AVAudioPlayer *bgPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:
+                           [NSURL fileURLWithPath:bgMusicPath] error:&error];
+  
+  bgPlayer.numberOfLoops = -1;
+  bgPlayer.currentTime = 0;
+  bgPlayer.volume = 1.0;
+  
+  [bgPlayer prepareToPlay];
+  self.BGMPlayer = bgPlayer;
+  [self.BGMPlayer play];
+  
+  // Set up button click audio
   NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"boom"
                                                        ofType:@"mp3"];
   NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-  AVAudioPlayer *setValuePlayer = [[AVAudioPlayer alloc]
+  _setValuePlayer = [[AVAudioPlayer alloc]
                                    initWithContentsOfURL:soundURL error:&error];
-  [setValuePlayer prepareToPlay];
+  [_setValuePlayer prepareToPlay];
   
-  self.audioPlayer = setValuePlayer;
+  // Set up winning sound audio
+  NSString *winPath =[[NSBundle mainBundle] pathForResource:@"win"
+                                                       ofType:@"mp3"];
+  NSURL *winURL = [NSURL fileURLWithPath:winPath];
+  _winPlayer = [[AVAudioPlayer alloc]
+                 initWithContentsOfURL:winURL error:&error];
+  [_winPlayer prepareToPlay];
+  
   
   // Initialize GridModel and initialize grid
   _gridModel = [[LBSTGridModel alloc] init];
@@ -143,7 +168,8 @@
     // If it's consistent, set the value
     if (consistentInput){
       // Play a sound effect
-      [self.audioPlayer play];
+      self.SFXPlayer = _setValuePlayer;
+      [self.SFXPlayer play];
       
       [_gridModel setValue:currentInput atRow:row andColumn:col];
       [_gridView setValue:currentInput atRow:row andColumn:col];
@@ -169,6 +195,9 @@
 - (void)alertWin
 {
   _inPlay = NO;
+  
+  self.SFXPlayer = _winPlayer;
+  [self.SFXPlayer play];
   
   NSString *message = [NSString stringWithFormat:@"You finished in %@!",
                        [[_timerView timerLabel] text]];
@@ -205,7 +234,7 @@
   // win alert), clear the value from every mutable cell in the grid
   if (buttonIndex == 1) {
     // Play a sound effect!
-    [[_gameButtonView audioPlayer] play];
+    [[_gameButtonView SFXPlayer] play];
 
     for (int row = 0; row < 9; row++) {
       for (int col = 0; col < 9; col++) {
