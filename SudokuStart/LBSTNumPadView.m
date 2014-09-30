@@ -7,7 +7,6 @@
 //
 
 #import "LBSTNumPadView.h"
-#import "UIImage+LBSTColorImage.h"
 
 @implementation LBSTNumPadView
 {
@@ -25,9 +24,11 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     
     // Set up button click audio
     NSError *error;
-    NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"click" ofType:@"mp3"];
+    NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"click"
+                                                         ofType:@"mp3"];
     NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-    AVAudioPlayer *numpadPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+    AVAudioPlayer *numpadPlayer = [[AVAudioPlayer alloc]
+                                   initWithContentsOfURL:soundURL error:&error];
     [numpadPlayer prepareToPlay];
     self.audioPlayer = numpadPlayer;
     
@@ -47,29 +48,37 @@ static CGFloat const IPAD_FONT_SIZE = 30;
     CGFloat deleteButtonYOffset = buttonSize + (2 * baseOffset);
     
     // Set up delete button
-    CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset, deleteButtonYOffset, deleteButtonWidth, deleteButtonHeight);
+    CGRect deleteButtonFrame = CGRectMake(deleteButtonXOffset,
+                                          deleteButtonYOffset,
+                                          deleteButtonWidth,
+                                          deleteButtonHeight);
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:deleteButtonFrame];
     deleteButton.tag = 0;
     
     // Delete button background
-    [deleteButton setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
+    [deleteButton setBackgroundImage:numpadNormalImage
+                            forState:UIControlStateNormal];
     
     // Set up delete button title
     [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-    [deleteButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+    [deleteButton setTitleColor:[UIColor blackColor]
+                       forState:UIControlStateNormal];
+    deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue"
+                                                   size:IPAD_FONT_SIZE];
     deleteButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     [self addSubview:deleteButton];
     
-    [deleteButton addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+    [deleteButton addTarget:self action:@selector(numSelected:)
+           forControlEvents:UIControlEventTouchDown];
     [_numbers addObject:deleteButton];
     
     UIButton *button;
     
     // Initialize number buttons
     for (int i = 0; i < 9; ++i) {
-      CGRect buttonFrame = CGRectMake(xOffset, baseOffset, buttonSize, buttonSize);
+      CGRect buttonFrame = CGRectMake(xOffset, baseOffset,
+                                      buttonSize, buttonSize);
       
       button = [[UIButton alloc] initWithFrame:buttonFrame];
       
@@ -80,22 +89,27 @@ static CGFloat const IPAD_FONT_SIZE = 30;
       // Make button 1 the default selected button
       if (buttonNum == 1) {
         [self setCurrentNum:buttonNum];
-        [button setBackgroundImage:numpadSelectedImage forState:UIControlStateNormal];
+        [button setBackgroundImage:numpadSelectedImage
+                          forState:UIControlStateNormal];
       }
       else {
-        [button setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
+        [button setBackgroundImage:numpadNormalImage
+                          forState:UIControlStateNormal];
       }
       
       // Set up title
-      [button setTitle:[NSString stringWithFormat:@"%ld", (long)button.tag] forState:UIControlStateNormal];
+      [button setTitle:[NSString stringWithFormat:@"%ld", (long)button.tag]
+              forState:UIControlStateNormal];
       [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-      button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:IPAD_FONT_SIZE];
+      button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue"
+                                               size:IPAD_FONT_SIZE];
       button.titleLabel.adjustsFontSizeToFitWidth = YES;
       
       [self addSubview:button];
       
       // Create target for button
-      [button addTarget:self action:@selector(numSelected:) forControlEvents:UIControlEventTouchDown];
+      [button addTarget:self action:@selector(numSelected:)
+         forControlEvents:UIControlEventTouchDown];
       
       // Add the button to the array
       [_numbers insertObject:button atIndex:buttonNum];
@@ -120,13 +134,16 @@ static CGFloat const IPAD_FONT_SIZE = 30;
   UIButton *oldButton = [_numbers objectAtIndex:[self currentNum]];
   
   // Change the background colors appropriately
-  [oldButton setBackgroundImage:numpadNormalImage forState:UIControlStateNormal];
+  [oldButton setBackgroundImage:numpadNormalImage
+                       forState:UIControlStateNormal];
   
   // Delete button and numpad buttons are highlighted differently
   if (newButton.tag == 0) {
-    [newButton setBackgroundImage:deleteSelectedImage forState:UIControlStateNormal];
+    [newButton setBackgroundImage:deleteSelectedImage
+                         forState:UIControlStateNormal];
   } else {
-    [newButton setBackgroundImage:numpadSelectedImage forState:UIControlStateNormal];
+    [newButton setBackgroundImage:numpadSelectedImage
+                         forState:UIControlStateNormal];
   }
 
   // Update which button is currently selected

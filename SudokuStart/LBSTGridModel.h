@@ -10,22 +10,22 @@
 #include <stdlib.h>
 
 @protocol AlertWin
--(void)alertWin;
+- (void)alertWin;
 @end
 
 @interface LBSTGridModel : NSObject
 
 @property (assign, nonatomic) id <AlertWin> delegate;
 
--(void) initializeGrid;
--(int) getValueAtRow:(int)row andColumn:(int)col;
--(void) setValue:(int)value atRow:(int)row andColumn:(int)col;
--(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col;
--(BOOL) isValueConsistent:(int)input atRow:(int)row andColumn:(int)col;
--(void) clearGrid;
+- (void)initializeGrid;
+- (int)getValueAtRow:(int)row andColumn:(int)col;
+- (void)setValue:(int)value atRow:(int)row andColumn:(int)col;
+- (BOOL)isCellMutableAtRow:(int)row andColumn:(int)col;
+- (BOOL)isValueConsistent:(int)input atRow:(int)row andColumn:(int)col;
+- (void)clearGrid;
 
-// public for testing
--(void) parseGridString:(NSString *)gridString;
--(BOOL) isWinning;
+// Public for testing
+- (void)parseGridString:(NSString *)gridString;
+- (BOOL)isWinning;
 
 @end

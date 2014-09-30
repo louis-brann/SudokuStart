@@ -8,7 +8,6 @@
 //
 
 #import "LBRMGridView.h"
-#import "UIImage+LBSTColorImage.h"
 
 @implementation LBRMGridView {
     NSMutableArray *_cells;
@@ -21,26 +20,28 @@ static CGFloat const IPAD_FONT_SIZE = 40;
   self = [super initWithFrame:frame];
   
   if (self) {
-    // Initialize array of buttons for 9x9 sudoku
+    // Initialize array of cells for 9x9 sudoku
     _cells = [[NSMutableArray alloc] initWithCapacity:9];
+    
     for (int i = 0; i < 9; ++i) {
       [_cells addObject:[[NSMutableArray alloc] initWithCapacity:9]];
     }
 
-    // Setup button size and offset
-    CGFloat frameSize = MIN(frame.size.height, frame.size.width);
+    // Setup cell size and offset
+    CGFloat frameSize = MIN(CGRectGetHeight(frame), CGRectGetWidth(frame));
     
-    // 9 buttons, plus 1 buttonSize reserved for borders
-    CGFloat buttonSize = frameSize/(9.0 + 1.0);
+    // 9 cells, plus 1 cellSize reserved for borders
+    CGFloat cellSize = frameSize/(9.0 + 1.0);
     
     // 10 Borders for 9 columns, + 4 to further separate subgrids
-    CGFloat baseOffset = buttonSize/(10.0 + 4.0);
+    CGFloat baseOffset = cellSize/(10.0 + 4.0);
     
     CGFloat yOffset = baseOffset;
-    UIButton *button;
+    
+    UIButton *cell;
     
     for (int row = 0; row < 9; ++row){
-      // Set/reset yOffset for new column
+      // Set/reset xOffset for new column
       CGFloat xOffset = baseOffset;
       
       // Extra horizontal offset to separate 3x3 subgrids
@@ -54,46 +55,53 @@ static CGFloat const IPAD_FONT_SIZE = 40;
           xOffset += baseOffset;
         }
         
-        // Setup frame and button
-        CGRect buttonFrame = CGRectMake(xOffset, yOffset, buttonSize, buttonSize);
-        button = [[UIButton alloc] initWithFrame:buttonFrame];
+        // Set up frame and cell
+        CGRect cellFrame = CGRectMake(xOffset, yOffset, cellSize, cellSize);
+        cell = [[UIButton alloc] initWithFrame:cellFrame];
       
         int xSubgrid = col / 3;
         int ySubgrid = row / 3;
-      
+        
+        [self addSubview: cell];
+        
+        // Create target for cell
+        [cell addTarget:self action:@selector(cellSelected:)
+           forControlEvents:UIControlEventTouchUpInside];
+        
+        // Style the cell
         // Give different colors to every other subgrid
+        // Colors arbitrarily chosen for aesthetic pleasure. Both are blue.
         if (abs(xSubgrid - ySubgrid) % 2 == 1) {
-          button.backgroundColor = [UIColor colorWithRed:0.706 green:0.867 blue:0.922 alpha:1.0];
+          cell.backgroundColor = [UIColor colorWithRed:0.706 green:0.867
+                                                  blue:0.922 alpha:1.0];
         }
         else {
-          button.backgroundColor = [UIColor colorWithRed:0.898 green:0.973 blue:1.0 alpha:1.0];
+          cell.backgroundColor = [UIColor colorWithRed:0.898 green:0.973
+                                                  blue:1.0 alpha:1.0];
         }
         
-        [self addSubview: button];
+        // Highlight color arbitrarily chosen for aesthetic pleasure
+        // It's green
+        UIColor *cellHighlightColor = [UIColor colorWithRed:0.486 green:0.816
+                                                       blue:0.447 alpha:1.0];
+        [cell setBackgroundImage: [UIImage imageWithColor:cellHighlightColor]
+                        forState:UIControlStateHighlighted];
         
-        // Create target for button
-        [button addTarget:self action:@selector(cellSelected:)forControlEvents:UIControlEventTouchUpInside];
+        [cell setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        cell.titleLabel.adjustsFontSizeToFitWidth = YES;
         
-        // Set up title
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        button.titleLabel.adjustsFontSizeToFitWidth = YES;
+        // Make the tag such that the first digit represents the row, and the
+        // second represents the column
+        cell.tag = (row * 10) + col;
         
-        // Set up highlighted background
-        UIColor *cellHighlightColor = [UIColor colorWithRed:0.486 green:0.816 blue:0.447 alpha:1.0];
-        [button setBackgroundImage: [UIImage imageWithColor:cellHighlightColor] forState:UIControlStateHighlighted];
-        
-        // Make the tag such that the first digit represents the
-        // row, and the second represents the column
-        button.tag = row*10+col;
-        
-        [[_cells objectAtIndex:row] insertObject:button atIndex:col];
+        [[_cells objectAtIndex:row] insertObject:cell atIndex:col];
         
         // Update column offset
-        xOffset += buttonSize+baseOffset;
+        xOffset += cellSize + baseOffset;
       }
       
       // Update row offset
-      yOffset += buttonSize + baseOffset;
+      yOffset += cellSize + baseOffset;
     }
   }
   
@@ -102,37 +110,39 @@ static CGFloat const IPAD_FONT_SIZE = 40;
 
 - (void)cellSelected:(id)sender
 {
-  // Send info to ViewController
+  // Delegate to ViewController
   [self.delegate cellWasTapped:sender];
 }
 
--(void)setValue:(int)value atRow:(int)row andColumn:(int)col
+- (void)setValue:(int)value atRow:(int)row andColumn:(int)col
 {
-  UIButton *button = [[_cells objectAtIndex:row] objectAtIndex:col];
+  UIButton *cell = [[_cells objectAtIndex:row] objectAtIndex:col];
   
-  // If the value is not 0, convert it into a string for the button title
-  // Otherwise, it is blank
+  // If the value is not 0, convert it into a string for the cell title
+  // Otherwise, the string is blank
   if (value != 0){
     NSString *numberToDisplay = [NSString stringWithFormat:@"%d", value];
-    [button setTitle:numberToDisplay forState:UIControlStateNormal];
+    [cell setTitle:numberToDisplay forState:UIControlStateNormal];
   }
   else {
-    [button setTitle:@"" forState:UIControlStateNormal];
+    [cell setTitle:@"" forState:UIControlStateNormal];
   }
 }
 
--(void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col
+- (void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col
 {
-  UIButton *button = [[_cells objectAtIndex:row] objectAtIndex:col];
+  UIButton *cell = [[_cells objectAtIndex:row] objectAtIndex:col];
   
   // If the value is not 0, it is an initial value, so make it bold
   // Otherwise, it is not initial, so set the font lighter so the
-  //  user can differentiate between initial and non-initial
+  // user can differentiate between initial and non-initial
   if (value != 0){
-    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:IPAD_FONT_SIZE];
+    cell.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold"
+                                           size:IPAD_FONT_SIZE];
     
   } else {
-    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:IPAD_FONT_SIZE];
+    cell.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light"
+                                           size:IPAD_FONT_SIZE];
   }
   
   [self setValue:value atRow:row andColumn:col];

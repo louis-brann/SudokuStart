@@ -19,9 +19,8 @@
 
 @interface LBSTGameButtonView : UIView
 
-@property (nonatomic, assign) id <StartNewGame, RestartGame> delegate;
+@property (assign, nonatomic) id <StartNewGame, RestartGame> delegate;
 
-@property (nonatomic) AVAudioPlayer *audioPlayer;
-
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end

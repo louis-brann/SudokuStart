@@ -17,6 +17,6 @@
 
 @interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, StartNewGame, RestartGame, UIAlertViewDelegate>
 
-@property (nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end

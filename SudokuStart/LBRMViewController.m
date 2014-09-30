@@ -8,12 +8,6 @@
 
 
 #import "LBRMViewController.h"
-//#import "LBRMGridView.h"
-//#import "LBSTGridModel.h"
-//#import "LBSTNumPadView.h"
-//#import "LBSTGameButtonView.h"
-//#import "LBSTTimerView.h"
-
 
 @interface LBRMViewController (){
   LBRMGridView *_gridView;
@@ -35,9 +29,11 @@
   
   // Set up button click audio
   NSError *error;
-  NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"boom" ofType:@"mp3"];
+  NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"boom"
+                                                       ofType:@"mp3"];
   NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-  AVAudioPlayer *setValuePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+  AVAudioPlayer *setValuePlayer = [[AVAudioPlayer alloc]
+                                   initWithContentsOfURL:soundURL error:&error];
   [setValuePlayer prepareToPlay];
   
   self.audioPlayer = setValuePlayer;
@@ -52,7 +48,7 @@
   CGFloat frameHeight = CGRectGetHeight(frame);
 
   // Set up the grid frame, based on a specified percentage of the frame that
-  //   the grid is supposed to take up
+  // the grid is supposed to take up
   CGFloat gridPctOfFrame = 0.80;
   CGFloat gridXOffset = 0.1 * frameWidth;
   CGFloat gridYOffset = 0.1 * frameHeight;
@@ -64,42 +60,55 @@
   _gridView.delegate = self;
   _gridView.backgroundColor = [UIColor blackColor];
   [self.view addSubview:_gridView];
+  
+  // Specify constants for rest of buttons
+  CGFloat cellSize = gridSize / 10.0;
+  CGFloat baseOffset = cellSize / (10.0 + 4.0);
+  CGFloat marginBetweenViews = (0.15 * gridYOffset);
 
   // Create numPad frame
   CGFloat numPadWidth = gridSize;
 
   // Have space for 1 row of buttons, and a delete button 75% of the height of a
-  //   normal button, and 3 strips of padding
-  CGFloat numPadHeight = (gridSize/10.0) * (1.75 + 0.3);
-  CGFloat numPadYOffset = (1.15 * gridYOffset) + CGRectGetHeight(gridFrame);
-  CGRect numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth, numPadHeight);
+  // normal button, and 3 strips of padding
+  CGFloat numPadHeight = (1.75 * cellSize) + (3 * baseOffset);
+  CGFloat numPadYOffset = gridYOffset + CGRectGetHeight(gridFrame) +
+    marginBetweenViews;
+  CGRect  numPadFrame = CGRectMake(gridXOffset, numPadYOffset, numPadWidth,
+                                   numPadHeight);
   
   // Create numPad view
   _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
   _numPadView.backgroundColor = [UIColor blackColor];
   [self.view addSubview:_numPadView];
   
-  CGFloat cellSize = gridSize / 10.0;
-  CGFloat baseOffset = cellSize / (10.0 + 4.0);
-  
   // Set up timer
+  // Create a frame for the timer that is 40% the height of the whitespace
+  // between the top of the frame and the grid
   CGFloat timerWidth = (3 * cellSize) + (2 * (baseOffset));
-  CGFloat timerHeight = 0.04 * frameHeight;
+  CGFloat timerHeight = 0.4 * gridYOffset;
   CGFloat timerXOffset = gridXOffset + (3 * cellSize) + (6 * baseOffset);
-  CGFloat timerYOffset = 0.05 * frameHeight;
-  CGRect  timerFrame = CGRectMake(timerXOffset, timerYOffset, timerWidth, timerHeight);
+  CGFloat timerYOffset = gridYOffset - marginBetweenViews - timerHeight;
+  CGRect  timerFrame = CGRectMake(timerXOffset, timerYOffset, timerWidth,
+                                  timerHeight);
   
+  // Create and style the timer
   _timerView = [[LBSTTimerView alloc] initWithFrame:timerFrame];
-  UIColor *timerBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebg-normal.png"]];
+  UIColor *timerBackgroundColor = [UIColor colorWithPatternImage:
+                                   [UIImage imageNamed:@"bluebg-normal.png"]];
   [_timerView setBackgroundColor:timerBackgroundColor];
+  
+  // Add the timer to the view
   [self.view addSubview:_timerView];
   
   // Set up gameButton view
   CGFloat gameButtonXOffset = gridXOffset;
-  CGFloat gameButtonYOffset = numPadYOffset + numPadHeight + (0.15 * gridYOffset);
+  CGFloat gameButtonYOffset = numPadYOffset + numPadHeight +
+    (0.15 * gridYOffset);
   CGFloat gameButtonHeight = cellSize + (2.0 * baseOffset);
   CGFloat gameButtonWidth = gridSize;
-  CGRect  gameButtonFrame = CGRectMake(gameButtonXOffset, gameButtonYOffset, gameButtonWidth, gameButtonHeight);
+  CGRect  gameButtonFrame = CGRectMake(gameButtonXOffset, gameButtonYOffset,
+                                       gameButtonWidth, gameButtonHeight);
   
   // Create gameButton view
   _gameButtonView = [[LBSTGameButtonView alloc] initWithFrame:gameButtonFrame];
@@ -117,44 +126,52 @@
 
 - (void)cellWasTapped:(id)sender
 {
-  if (_inPlay){
+  if (!_inPlay){
+    return;
+  }
+  
+  UIButton *button = (UIButton*)sender;
+  int row = (int)button.tag / 10;
+  int col = (int)button.tag % 10;
+  
+  if ([_gridModel isCellMutableAtRow:row andColumn:col]){
+    // Check the current input for consistency
+    int currentInput = [_numPadView currentNum];
+    BOOL consistentInput = [_gridModel isValueConsistent:currentInput
+                                                   atRow:row andColumn:col];
     
-    UIButton *button = (UIButton*)sender;
-    int row = (int)button.tag / 10;
-    int col = (int)button.tag % 10;
-    
-    if ([_gridModel isCellMutableAtRow:row andColumn:col]){
-      // Check the current input for consistency
-      int currentInput = [_numPadView currentNum];
-      BOOL consistentInput = [_gridModel isValueConsistent:currentInput atRow:row andColumn:col];
+    // If it's consistent, set the value
+    if (consistentInput){
+      // Play a sound effect
+      [self.audioPlayer play];
       
-      // If it's consistent, set the value
-      if (consistentInput){
-        // Play a sound effect
-        [self.audioPlayer play];
-        [_gridModel setValue:currentInput atRow:row andColumn:col];
-        [_gridView setValue:currentInput atRow:row andColumn:col];
-      }
+      [_gridModel setValue:currentInput atRow:row andColumn:col];
+      [_gridView setValue:currentInput atRow:row andColumn:col];
     }
   }
 }
 
 - (void)restartGame
 {
-  if (_inPlay){
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restart Game"
-                                                    message:@"Are you sure you want to restart this game?"
-                                                   delegate:self
-                                          cancelButtonTitle:@"NO!"
-                                          otherButtonTitles:@"Yes", nil];
-    [alert show];
+  if (!_inPlay){
+    return;
   }
+  
+  UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Restart Game"
+                        message:@"Are you sure you want to restart this game?"
+                        delegate:self
+                        cancelButtonTitle:@"NO!"
+                        otherButtonTitles:@"Yes", nil];
+  [alert show];
 }
 
 - (void)alertWin
 {
   _inPlay = NO;
-  NSString *message = [NSString stringWithFormat:@"You finished in %@!", [[_timerView timerLabel] text]];
+  
+  NSString *message = [NSString stringWithFormat:@"You finished in %@!",
+                       [[_timerView timerLabel] text]];
   UIAlertView *winAlert = [[UIAlertView alloc] initWithTitle:@"Congratulations!"
                                                      message:message
                                                     delegate:self
@@ -163,7 +180,7 @@
   [winAlert show];
 }
 
--(void)startNewGame
+- (void)startNewGame
 {
   [_gridModel clearGrid];
   [_gridModel initializeGrid];
@@ -181,10 +198,11 @@
   [_timerView startTimer];
 }
 
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:
+    (NSInteger)buttonIndex {
   
   // If the user clicked the second button (OK on ClearGrid, doesn't exist on
-  //    win alert), clear the value from every mutable cell in the grid
+  // win alert), clear the value from every mutable cell in the grid
   if (buttonIndex == 1) {
     // Play a sound effect!
     [[_gameButtonView audioPlayer] play];

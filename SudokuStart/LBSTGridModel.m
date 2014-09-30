@@ -14,7 +14,7 @@
   NSMutableArray *_currentGrid;
 }
 
-- (NSString *) getGridString:(int)gridNumber {
+- (NSString *)getGridString:(int)gridNumber {
   // Determine which file the chosen grid is in
   int gridFile = gridNumber / 30000;
   
@@ -28,25 +28,28 @@
     path = [[NSBundle mainBundle] pathForResource:@"grid2" ofType:@"txt"];
   }
   
-  NSString *gridString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+  NSString *gridString = [[NSString alloc] initWithContentsOfFile:path
+                          encoding:NSUTF8StringEncoding error:&error];
   
   // Get the substring of 81 chars for the chosen grid
+  // Multiply by 82 to account for the newline char
   int gridSubstringStartIndex = (gridNumber - (gridFile * 30000)) * 82;
-  NSString *gridSubstring = [gridString substringWithRange:NSMakeRange(gridSubstringStartIndex, 81)];
+  NSString *gridSubstring = [gridString substringWithRange:
+                             NSMakeRange(gridSubstringStartIndex, 81)];
   
   return gridSubstring;
 }
 
-- (void) parseGridString:(NSString *)gridString {
+- (void)parseGridString:(NSString *)gridString {
   
   // Put in initialGrid and currentGrid, counting 0s while going through
   _initialGrid = [[NSMutableArray alloc] initWithCapacity:9];
   _currentGrid = [[NSMutableArray alloc] initWithCapacity:9];
   _numBlankCells = 0;
+  
   NSNumber *numberToAdd;
   
-  // It returned an out of bounds error after trying to add to empty nested arrays,
-  // so we made the inner arrays first, then added
+  // Create the nested row arrays first, then add them to the grid arrays
   for (int row = 0; row < 9; ++row){
     
     NSMutableArray *initRowArray = [[NSMutableArray alloc] initWithCapacity:9];
@@ -54,7 +57,8 @@
     
     for (int col = 0; col < 9; ++col){
       int currentNumberPosition = (row * 9) + col;
-      NSString *currentNumberString = [gridString substringWithRange:NSMakeRange(currentNumberPosition, 1)];
+      NSString *currentNumberString = [gridString substringWithRange:
+                                       NSMakeRange(currentNumberPosition, 1)];
       
       if ([currentNumberString isEqualToString:@"."]) {
         numberToAdd = [NSNumber numberWithInt:0];
@@ -75,38 +79,39 @@
   }
 }
 
-- (void) initializeGrid
+- (void)initializeGrid
 {
   // Choose a random grid to initialize the board with
   int randomGridNumber = arc4random_uniform(60000);
   
   NSString *randomGridString = [self getGridString:randomGridNumber];
-  NSString *nearWinningBoard = @"96152843743761958258243796182619375475926431831487562917534289664398127529875614.";
   
   [self parseGridString:randomGridString];
   
 }
 
-- (int) getValueAtRow:(int)row andColumn:(int)col
+- (int)getValueAtRow:(int)row andColumn:(int)col
 {
   NSNumber *nsValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
   return [nsValue intValue];
 }
 
--(void) setValue:(int)value atRow:(int)row andColumn:(int)col
+-(void)setValue:(int)value atRow:(int)row andColumn:(int)col
 {
-  NSNumber *currentNSValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
+  NSNumber *currentNSValue = [[_currentGrid objectAtIndex:row]
+                              objectAtIndex:col];
   
-  // If the current value is zero and the input isn't, that's one less blank cell
-  // If the current value is non-zero and the input is zero, that's one more blank
-  //    cell
+  // If the current value is zero and the input isn't, that's one less blank
+  // cell. If the current value is non-zero and the input is zero, that's one
+  // more blank cell
   if ([currentNSValue intValue] == 0 && value != 0){
     --_numBlankCells;
   } else if ([currentNSValue intValue] != 0 && value == 0){
     ++_numBlankCells;
   }
   
-  [[_currentGrid objectAtIndex:row] setObject:[NSNumber numberWithInt:value] atIndex:col];
+  [[_currentGrid objectAtIndex:row] setObject:[NSNumber numberWithInt:value]
+                                      atIndex:col];
   
   // If input fills grid, check for a win
   if (_numBlankCells == 0){
@@ -117,7 +122,7 @@
 }
 
 // Mutable if empty in initial grid
--(BOOL) isCellMutableAtRow:(int)row andColumn:(int)col
+-(BOOL)isCellMutableAtRow:(int)row andColumn:(int)col
 {
   NSNumber *nsValue = [[_initialGrid objectAtIndex:row] objectAtIndex:col];
   if ([nsValue intValue] == 0){
@@ -130,7 +135,7 @@
 // Checks values for consistency against initial values upon being input
 //   Does not need to avoid checking against itself, since it only gets called
 //   when values are being input, and initial values cannot be overwritten
--(BOOL) isValueConsistent:(int)value atRow:(int)row andColumn:(int)col
+-(BOOL)isValueConsistent:(int)value atRow:(int)row andColumn:(int)col
 {
   // Always able to delete a cell
   if (value == 0){
@@ -159,7 +164,8 @@
   
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
-      NSNumber *nsValue = [[_initialGrid objectAtIndex:subgridRowStart+i] objectAtIndex:subgridColStart+j];
+      NSNumber *nsValue = [[_initialGrid objectAtIndex:subgridRowStart+i]
+                           objectAtIndex:subgridColStart+j];
       if ([nsValue intValue] == value) {
         return NO;
       }
@@ -170,7 +176,8 @@
   return YES;
 }
 
--(BOOL)isCurrentGridConsistentWithValue:(int)value atRow:(int)row andColumn:(int)col
+-(BOOL)isCurrentGridConsistentWithValue:(int)value atRow:(int)row
+                              andColumn:(int)col
 {
   // Check the row of the value, avoiding checking against itself (i = col)
   for (int i = 0; i < 9; ++i) {
@@ -197,10 +204,12 @@
       int currentCellRow = subgridRowStart+i;
       int currentCellCol = subgridColStart+j;
       
-      NSNumber *nsValue = [[_currentGrid objectAtIndex:currentCellRow] objectAtIndex:currentCellCol];
+      NSNumber *nsValue = [[_currentGrid objectAtIndex:currentCellRow]
+                           objectAtIndex:currentCellCol];
       
       // Make sure to avoid checking against itself
-      if (!(currentCellRow == row && currentCellCol == col) && [nsValue intValue] == value) {
+      if (!(currentCellRow == row && currentCellCol == col)
+          && [nsValue intValue] == value) {
         return NO;
       }
     }
@@ -216,7 +225,8 @@
   for (int row = 0; row < 9; ++row){
     for (int col = 0; col < 9; ++col){
       NSNumber *nsValue = [[_currentGrid objectAtIndex:row] objectAtIndex:col];
-      BOOL valueConsistent = [self isCurrentGridConsistentWithValue:[nsValue intValue] atRow:row andColumn:col];
+      BOOL valueConsistent = [self isCurrentGridConsistentWithValue:
+                              [nsValue intValue] atRow:row andColumn:col];
       
       if (!valueConsistent){
         return NO;

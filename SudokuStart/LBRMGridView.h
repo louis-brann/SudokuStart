@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImage+LBSTColorImage.h"
 
 @protocol CellWasTapped
 - (void)cellWasTapped:(id)sender;
@@ -14,9 +15,9 @@
 
 @interface LBRMGridView : UIView
 
-@property (nonatomic, assign) id <CellWasTapped> delegate;
+@property (assign, nonatomic) id <CellWasTapped> delegate;
 
--(void)setValue:(int)value atRow:(int)row andColumn:(int)col;
--(void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col;
+- (void)setValue:(int)value atRow:(int)row andColumn:(int)col;
+- (void)setInitialValue:(int)value atRow:(int)row andColumn:(int)col;
 
 @end
