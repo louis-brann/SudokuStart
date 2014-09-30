@@ -8,16 +8,18 @@
 
 
 #import "LBRMViewController.h"
-#import "LBRMGridView.h"
-#import "LBSTGridModel.h"
-#import "LBSTNumPadView.h"
-#import "LBSTTimerView.h"
+//#import "LBRMGridView.h"
+//#import "LBSTGridModel.h"
+//#import "LBSTNumPadView.h"
+//#import "LBSTGameButtonView.h"
+//#import "LBSTTimerView.h"
 
 
 @interface LBRMViewController (){
   LBRMGridView *_gridView;
   LBSTNumPadView *_numPadView;
   LBSTGridModel *_gridModel;
+  LBSTGameButtonView *_gameButtonView;
   LBSTTimerView *_timerView;
   
   BOOL _inPlay;
@@ -30,6 +32,15 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  // Set up button click audio
+  NSError *error;
+  NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"boom" ofType:@"mp3"];
+  NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
+  AVAudioPlayer *setValuePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
+  [setValuePlayer prepareToPlay];
+  
+  self.audioPlayer = setValuePlayer;
   
   // Initialize GridModel and initialize grid
   _gridModel = [[LBSTGridModel alloc] init];
@@ -66,58 +77,34 @@
   // Create numPad view
   _numPadView = [[LBSTNumPadView alloc] initWithFrame:numPadFrame];
   _numPadView.backgroundColor = [UIColor blackColor];
-  _numPadView.delegate = self;
   [self.view addSubview:_numPadView];
-
-  // New game button frame
-  CGFloat cellSize = gridSize/(9.0 + 1.0);
-  CGFloat newGameButtonBorder = cellSize/10.0;
-  CGFloat newGameButtonWidth = (3 * cellSize) + (4 * newGameButtonBorder);
-  CGFloat newGameButtonHeight = cellSize + (2 * newGameButtonBorder);
-  CGFloat newGameButtonXOffset = gridXOffset + cellSize + newGameButtonBorder;
-  CGFloat newGameButtonYOffset = (0.25 * gridYOffset) + numPadYOffset + numPadHeight;
-  CGRect  newGameFrame = CGRectMake(newGameButtonXOffset,
-                                    newGameButtonYOffset,
-                                    newGameButtonWidth,
-                                    newGameButtonHeight);
-
-  // Make new game button
-  UIButton *newGameButton = [[UIButton alloc] initWithFrame:newGameFrame];
   
-  [self.view addSubview:newGameButton];
-  
-  // Style the button
-  CGFloat newGameButtonFontSize = 24;
-  [newGameButton setTitle:@"Start New Game" forState:UIControlStateNormal];
-  newGameButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:newGameButtonFontSize];
-  newGameButton.titleLabel.textColor = [UIColor whiteColor];
-  newGameButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-
-  UIImage *newGameButtonNormalImage = [UIImage imageNamed:@"bluebg-normal.png"];
-  UIImage *newGameButtonHighlightImage = [UIImage imageNamed:@"bluebg-highlight.png"];
-  [newGameButton setBackgroundImage:newGameButtonNormalImage forState:UIControlStateNormal];
-  [newGameButton setBackgroundImage:newGameButtonHighlightImage forState:UIControlStateHighlighted];
-
-  [newGameButton addTarget:self action:@selector(startNewGame)forControlEvents:UIControlEventTouchUpInside];
+  CGFloat cellSize = gridSize / 10.0;
+  CGFloat baseOffset = cellSize / (10.0 + 4.0);
   
   // Set up timer
-//  CGFloat timerWidth = newGameButtonWidth;
-//  CGFloat timerHeight = newGameButtonHeight;
-//  CGFloat timerXOffset = frameWidth - (newGameButtonXOffset + newGameButtonWidth);
-//  CGFloat timerYOffset = newGameButtonYOffset;
-  CGFloat buttonSize = gridSize / 10.0;
-  CGFloat baseOffset = buttonSize / (10.0 + 4.0);
-  CGFloat timerWidth = (3 * buttonSize) + (2 * (baseOffset));
+  CGFloat timerWidth = (3 * cellSize) + (2 * (baseOffset));
   CGFloat timerHeight = 0.04 * frameHeight;
-  CGFloat timerXOffset = gridXOffset + (3 * buttonSize) + (6 * baseOffset);
+  CGFloat timerXOffset = gridXOffset + (3 * cellSize) + (6 * baseOffset);
   CGFloat timerYOffset = 0.05 * frameHeight;
   CGRect  timerFrame = CGRectMake(timerXOffset, timerYOffset, timerWidth, timerHeight);
   
   _timerView = [[LBSTTimerView alloc] initWithFrame:timerFrame];
   UIColor *timerBackgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bluebg-normal.png"]];
-  // UIColor *timerBackgroundColor = [UIColor blackColor];
   [_timerView setBackgroundColor:timerBackgroundColor];
   [self.view addSubview:_timerView];
+  
+  // Set up gameButton view
+  CGFloat gameButtonXOffset = gridXOffset;
+  CGFloat gameButtonYOffset = numPadYOffset + numPadHeight + (0.15 * gridYOffset);
+  CGFloat gameButtonHeight = cellSize + (2.0 * baseOffset);
+  CGFloat gameButtonWidth = gridSize;
+  CGRect  gameButtonFrame = CGRectMake(gameButtonXOffset, gameButtonYOffset, gameButtonWidth, gameButtonHeight);
+  
+  // Create gameButton view
+  _gameButtonView = [[LBSTGameButtonView alloc] initWithFrame:gameButtonFrame];
+  _gameButtonView.delegate = self;
+  [self.view addSubview:_gameButtonView];
   
   [self startNewGame];
 }
@@ -143,6 +130,8 @@
       
       // If it's consistent, set the value
       if (consistentInput){
+        // Play a sound effect
+        [self.audioPlayer play];
         [_gridModel setValue:currentInput atRow:row andColumn:col];
         [_gridView setValue:currentInput atRow:row andColumn:col];
       }
@@ -150,7 +139,7 @@
   }
 }
 
-- (void)clearCellValues
+- (void)restartGame
 {
   if (_inPlay){
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
@@ -176,17 +165,6 @@
 
 -(void)startNewGame
 {
-  // Set up button click audio
-  NSError *error;
-  NSString *soundPath =[[NSBundle mainBundle] pathForResource:@"click" ofType:@"mp3"];
-  NSURL *soundURL = [NSURL fileURLWithPath:soundPath];
-  AVAudioPlayer *numpadPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
-  [numpadPlayer prepareToPlay];
-  self.audioPlayer = numpadPlayer;
-  
-  // Play a sound effect!
-  [self.audioPlayer play];
-  
   [_gridModel clearGrid];
   [_gridModel initializeGrid];
   
@@ -208,6 +186,9 @@
   // If the user clicked the second button (OK on ClearGrid, doesn't exist on
   //    win alert), clear the value from every mutable cell in the grid
   if (buttonIndex == 1) {
+    // Play a sound effect!
+    [[_gameButtonView audioPlayer] play];
+
     for (int row = 0; row < 9; row++) {
       for (int col = 0; col < 9; col++) {
         if ([_gridModel isCellMutableAtRow:row andColumn:col]) {

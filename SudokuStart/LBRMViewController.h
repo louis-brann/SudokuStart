@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "LBRMGridView.h"
 #import "LBSTGridModel.h"
 #import "LBSTNumPadView.h"
+#import "LBSTGameButtonView.h"
+#import "LBSTTimerView.h"
 
-@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, ClearCellValues, UIAlertViewDelegate>
+@interface LBRMViewController : UIViewController <CellWasTapped, AlertWin, StartNewGame, RestartGame, UIAlertViewDelegate>
 
 @property (nonatomic) AVAudioPlayer *audioPlayer;
 

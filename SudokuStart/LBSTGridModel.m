@@ -83,7 +83,7 @@
   NSString *randomGridString = [self getGridString:randomGridNumber];
   NSString *nearWinningBoard = @"96152843743761958258243796182619375475926431831487562917534289664398127529875614.";
   
-  [self parseGridString:nearWinningBoard];
+  [self parseGridString:randomGridString];
   
 }
 

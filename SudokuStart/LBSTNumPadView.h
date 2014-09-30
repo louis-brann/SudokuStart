@@ -9,13 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@protocol ClearCellValues
-- (void)clearCellValues;
-@end
-
 @interface LBSTNumPadView : UIView
-
-@property (nonatomic, assign) id <ClearCellValues> delegate;
 
 @property (nonatomic) int currentNum;
 @property (nonatomic) AVAudioPlayer *audioPlayer;

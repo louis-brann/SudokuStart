@@ -23,6 +23,10 @@
 /* Begin PBXBuildFile section */
 		2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B219D4B0E000EED6C9 /* grid1.txt */; };
 		2656A3B519D4B0E100EED6C9 /* grid2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2656A3B319D4B0E000EED6C9 /* grid2.txt */; };
+		26D817F919DA247C00166A09 /* LBSTGameButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D817F819DA247C00166A09 /* LBSTGameButtonView.m */; };
+		26D817FB19DA344200166A09 /* scribble.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FA19DA344200166A09 /* scribble.mp3 */; };
+		26D817FD19DA358B00166A09 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FC19DA358B00166A09 /* boom.mp3 */; };
+		26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26D817FE19DA3E6F00166A09 /* yay.mp3 */; };
 		26E82F8619D7343B005C990B /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26E82F8519D7343B005C990B /* click.mp3 */; };
 		26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E82F8819D737F5005C990B /* LBSTTimerView.m */; };
 		D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AB4FA319C377550004EAD0 /* LBRMGridView.m */; };
@@ -58,6 +62,11 @@
 /* Begin PBXFileReference section */
 		2656A3B219D4B0E000EED6C9 /* grid1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid1.txt; sourceTree = "<group>"; };
 		2656A3B319D4B0E000EED6C9 /* grid2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grid2.txt; sourceTree = "<group>"; };
+		26D817F719DA247C00166A09 /* LBSTGameButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTGameButtonView.h; sourceTree = "<group>"; };
+		26D817F819DA247C00166A09 /* LBSTGameButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTGameButtonView.m; sourceTree = "<group>"; };
+		26D817FA19DA344200166A09 /* scribble.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scribble.mp3; sourceTree = "<group>"; };
+		26D817FC19DA358B00166A09 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		26D817FE19DA3E6F00166A09 /* yay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = yay.mp3; sourceTree = "<group>"; };
 		26E82F8519D7343B005C990B /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		26E82F8719D737F5005C990B /* LBSTTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSTTimerView.h; sourceTree = "<group>"; };
 		26E82F8819D737F5005C990B /* LBSTTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSTTimerView.m; sourceTree = "<group>"; };
@@ -117,6 +126,9 @@
 		26E82F8419D7342B005C990B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				26D817FE19DA3E6F00166A09 /* yay.mp3 */,
+				26D817FC19DA358B00166A09 /* boom.mp3 */,
+				26D817FA19DA344200166A09 /* scribble.mp3 */,
 				26E82F8519D7343B005C990B /* click.mp3 */,
 			);
 			name = Audio;
@@ -169,6 +181,8 @@
 				D8AB4FA319C377550004EAD0 /* LBRMGridView.m */,
 				DABC6CCA19CB827D0008ECFD /* LBSTNumPadView.h */,
 				DABC6CCB19CB827D0008ECFD /* LBSTNumPadView.m */,
+				26D817F719DA247C00166A09 /* LBSTGameButtonView.h */,
+				26D817F819DA247C00166A09 /* LBSTGameButtonView.m */,
 				DAB82DCF19CCCEA800A03907 /* LBSTGridModel.h */,
 				DAB82DD019CCCEA800A03907 /* LBSTGridModel.m */,
 				2656A3B219D4B0E000EED6C9 /* grid1.txt */,
@@ -298,8 +312,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26D817FF19DA3E6F00166A09 /* yay.mp3 in Resources */,
 				DA07251A19C247B6001F4BC2 /* Images.xcassets in Resources */,
 				DA07250C19C247B6001F4BC2 /* InfoPlist.strings in Resources */,
+				26D817FB19DA344200166A09 /* scribble.mp3 in Resources */,
+				26D817FD19DA358B00166A09 /* boom.mp3 in Resources */,
 				2656A3B419D4B0E100EED6C9 /* grid1.txt in Resources */,
 				26E82F8619D7343B005C990B /* click.mp3 in Resources */,
 				DA07251519C247B6001F4BC2 /* Main.storyboard in Resources */,
@@ -356,6 +373,7 @@
 				D8AB4FA419C377550004EAD0 /* LBRMGridView.m in Sources */,
 				26E82F8919D737F5005C990B /* LBSTTimerView.m in Sources */,
 				DA07251819C247B6001F4BC2 /* LBRMViewController.m in Sources */,
+				26D817F919DA247C00166A09 /* LBSTGameButtonView.m in Sources */,
 				DA07250E19C247B6001F4BC2 /* main.m in Sources */,
 				DABC6CC819C946230008ECFD /* UIImage+LBSTColorImage.m in Sources */,
 				DA07251219C247B6001F4BC2 /* LBRMAppDelegate.m in Sources */,
@@ -442,6 +460,8 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
