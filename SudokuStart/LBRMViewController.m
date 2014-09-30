@@ -142,8 +142,8 @@
 - (void)restartGame
 {
   if (_inPlay){
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UIAlertView"
-                                                    message:@"Are you sure you want to clear the grid?"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Restart Game"
+                                                    message:@"Are you sure you want to restart this game?"
                                                    delegate:self
                                           cancelButtonTitle:@"NO!"
                                           otherButtonTitles:@"Yes", nil];

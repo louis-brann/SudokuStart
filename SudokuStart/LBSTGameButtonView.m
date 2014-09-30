@@ -97,6 +97,7 @@
 - (void)restartGamePressed
 {
   // Delegate to ViewController
+  self.audioPlayer = newGamePlayer;
   [self.delegate restartGame];
 }
 
